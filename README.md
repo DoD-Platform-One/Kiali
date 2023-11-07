@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.76.0-bb.0](https://img.shields.io/badge/Version-1.76.0--bb.0-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
+![Version: 1.76.0-bb.1](https://img.shields.io/badge/Version-1.76.0--bb.1-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -80,6 +80,7 @@ helm install kiali chart/
 | onlyViewOnlyMode | bool | `false` |  |
 | allowAdHocKialiNamespace | bool | `true` |  |
 | allowAdHocKialiImage | bool | `true` |  |
+| allowAdHocOSSMConsoleImage | bool | `false` |  |
 | allowSecurityContextOverride | bool | `true` |  |
 | allowAllAccessibleNamespaces | bool | `true` |  |
 | accessibleNamespacesLabel | string | `""` |  |
@@ -139,7 +140,7 @@ helm install kiali chart/
 | openshift | bool | `false` |  |
 | svcPatchJob.enabled | bool | `false` |  |
 | svcPatchJob.image.repository | string | `"registry1.dso.mil/ironbank/big-bang/base"` |  |
-| svcPatchJob.image.tag | string | `"2.0.0"` |  |
+| svcPatchJob.image.tag | string | `"2.1.0"` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://kiali:{{ default 20001 .Values.port }}"` |  |
