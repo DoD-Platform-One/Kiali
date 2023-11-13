@@ -35,10 +35,10 @@ tolerations: []
 resources:
   requests:
     cpu: 200m
-    memory: 1700Mi
+    memory: 8000Mi
   limits:
     cpu: 200m
-    memory: 1700Mi
+    memory: 8000Mi
 affinity: {}
 replicaCount: 1
 priorityClassName: ""

@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.76.0-bb.1](https://img.shields.io/badge/Version-1.76.0--bb.1-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
+![Version: 1.76.0-bb.2](https://img.shields.io/badge/Version-1.76.0--bb.2-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -56,9 +56,9 @@ helm install kiali chart/
 | env | list | `[]` |  |
 | tolerations | list | `[]` |  |
 | resources.requests.cpu | string | `"200m"` |  |
-| resources.requests.memory | string | `"1700Mi"` |  |
+| resources.requests.memory | string | `"8000Mi"` |  |
 | resources.limits.cpu | string | `"200m"` |  |
-| resources.limits.memory | string | `"1700Mi"` |  |
+| resources.limits.memory | string | `"8000Mi"` |  |
 | affinity | object | `{}` |  |
 | replicaCount | int | `1` |  |
 | priorityClassName | string | `""` |  |
