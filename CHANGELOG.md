@@ -3,21 +3,25 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.76.0-bb.3] - 2023-11-14
+### Changed
+- Kiali CR deployment container securityContext
+
 ## [1.76.0-bb.2] - 2023-11-12
-### Updated
+### Changed
 - Increase memory limit from 1700 to 8000 to prevent operator from OOM crashes in pipelines
 
 ## [1.76.0-bb.1] - 2023-11-07
-### Updated
-- Updated registry1.dso.mil/ironbank/big-bang/base 2.0.0 -> 2.1.0
+### Changed
+- Changed registry1.dso.mil/ironbank/big-bang/base 2.0.0 -> 2.1.0
 
 ## [1.76.0-bb.0] - 2023-11-01
-### Updated
-- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.76.0 
+### Changed
+- Changed registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.76.0 
 
 ## [1.74.0-bb.4] - 2023-10-26
 ### Added
-- Updated to 1.75.1 images (latest in IB) 
+- Changed to 1.75.1 images (latest in IB) 
 
 ## [1.74.0-bb.3] - 2023-10-19
 ### Changed
@@ -25,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.74.0-bb.2] - 2023-10-07
 ### Added
-- Updated non root group user for kiali CR
+- Changed non root group user for kiali CR
 
 ## [1.74.0-bb.1] - 2023-10-06
 ### Changed
@@ -40,28 +44,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.72.0-bb.2] - 2023-09-07
 ### Added
-- Updated non root group user
+- Changed non root group user
 
 ## [1.72.0-bb.1] - 2023-08-18
 ### Changed
 - Upgraded to Gluon 0.4.1 and Cypress 13.x
-- Updated cypress test to Cypress 13.x format
+- Changed cypress test to Cypress 13.x format
 
 ## [1.72.0-bb.0] - 2023-08-18
 ### Added
-- Updated to 1.72.0 images (latest in IB)
+- Changed to 1.72.0 images (latest in IB)
 
 ## [1.71.0-bb.1] - 2023-07-26
 ### Changed
-- Updated grafana in_cluster_url value in chart/values.yaml
+- Changed grafana in_cluster_url value in chart/values.yaml
 
 ## [1.71.0-bb.0] - 2023-07-21
 ### Added
-- Updated to 1.71.0 images (latest in IB)
+- Changed to 1.71.0 images (latest in IB)
 
 ## [1.70.0-bb.0] - 2023-07-12
 ### Added
-- Updated to 1.70.0 images (latest in IB)
+- Changed to 1.70.0 images (latest in IB)
 
 ## [1.68.0-bb.1] - 2023-06-30
 ### Added
@@ -69,11 +73,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.68.0-bb.0] - 2023-06-06
 ### Added
-- Updated to 1.68.0 images (latest in IB)
+- Changed to 1.68.0 images (latest in IB)
 
 ## [1.67.0-bb.0] - 2023-05-18
 ### Changed
-- Updated to 1.67.0 images (latest in IB)
+- Changed to 1.67.0 images (latest in IB)
 
 ## [1.66.0-bb.1] - 2023-05-26
 ### Added
@@ -81,15 +85,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.66.0-bb.0] - 2023-04-11
 ### Changed
-- Updated to 1.66.0 images (latest in IB)
+- Changed to 1.66.0 images (latest in IB)
 
 ## [1.65.0-bb.0] - 2023-02-22
 ### Changed
-- Updated to 1.65.0 images (latest in IB)
+- Changed to 1.65.0 images (latest in IB)
 
 ## [1.64.0-bb.0] - 2023-02-22
 ### Changed
-- Updated to 1.64.0 images (latest in IB)
+- Changed to 1.64.0 images (latest in IB)
 
 ## [1.60.0-bb.2] - 2023-01-20
 ### Changed
@@ -101,7 +105,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.60.0-bb.0] - 2022-12-14
 ### Changed
-- Updated to 1.60.0 images (latest in IB)
+- Changed to 1.60.0 images (latest in IB)
 
 ## [1.59.1-bb.1] - 2022-11-18
 ### Changed
@@ -109,15 +113,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.59.1-bb.0] - 2022-11-15
 ### Changed
-- Updated to 1.59.1 images (latest in IB)
+- Changed to 1.59.1 images (latest in IB)
 
 ## [1.58.0-bb.0] - 2022-10-20
 ### Changed
-- Updated to 1.58.0 images (latest in IB)
+- Changed to 1.58.0 images (latest in IB)
 
 ## [1.57.1-bb.0] - 2022-09-13
 ### Changed
-- Updated to 1.57.1 images (latest in IB)
+- Changed to 1.57.1 images (latest in IB)
 
 ## [1.56.1-bb.1] - 2022-09-13
 ### Fixed
@@ -125,36 +129,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.56.1-bb.0] - 2022-09-13
 ### Changed
-- Updated to 1.56.1 images (latest in IB)
+- Changed to 1.56.1 images (latest in IB)
 
 ## [1.56.0-bb.0] - 2022-09-12
 ### Changed
-- Updated to 1.56.0 images (latest in IB)
+- Changed to 1.56.0 images (latest in IB)
 
 ## [1.55.0-bb.0] - 2022-08-23
 ### Changed
-- Updated to 1.55.0 images (latest in IB)
+- Changed to 1.55.0 images (latest in IB)
 
 ## [1.54.0-bb.0] - 2022-08-01
 ### Changed
-- Updated to 1.50.0 images (latest in IB)
+- Changed to 1.50.0 images (latest in IB)
 
 ## [1.51.0-bb.3] - 2022-06-30
 ### Added
 - Added cypress test for keycloak sso integration
 
 ## [1.51.0-bb.2] - 2022-06-28
-### Updated
-- Updated bb base image to 2.0.0
+### Changed
+- Changed bb base image to 2.0.0
 - Update gluon to 0.2.10
 
 ## [1.51.0-bb.1] - 2022-06-23
-### Updated
+### Changed
 - Drop all capabilities for operator
 
 ## [1.51.0-bb.0] - 2022-06-07
-### Updated
-- Updated to 1.51.0 images (latest in IB)
+### Changed
+- Changed to 1.51.0 images (latest in IB)
 
 ## [1.50.0-bb.1] - 2022-05-26
 ### Changed
@@ -162,11 +166,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.50.0-bb.0] - 2022-05-23 
 ### Changed
-- Updated to 1.50.0 images (latest in IB)
+- Changed to 1.50.0 images (latest in IB)
 
 ## [1.49.0-bb.0] - 2022-04-25
 ### Changed
-- Updated to 1.49.0 images (latest in IB)
+- Changed to 1.49.0 images (latest in IB)
 
 ## [1.47.0-bb.5] - 2022-04-13
 ### Changed
@@ -191,7 +195,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.47.0-bb.0] - 2022-02-24
 ### Changed
-- Updated to Kiali 1.47.0 and latest upstream chart
+- Changed to Kiali 1.47.0 and latest upstream chart
 
 ## [1.45.0-bb.3] - 2022-02-15
 ### Changed
@@ -208,8 +212,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.45.0-bb.0] - 2022-1-21
 ### Changed
-- Updated to new Upstream chart
-- Updated Image tags to v1.45.0
+- Changed to new Upstream chart
+- Changed Image tags to v1.45.0
 
 ## [1.44.0-bb.3] - 2022-1-21
 ### Changed
@@ -220,28 +224,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added OSCAL document for NIST 800-53 control inhertiance
 
 ## [1.44.0-bb.1] - 2021-12-14
-### Updated
+### Changed
 - Update Kiali Server to v1.44.0
 
 ## [1.44.0-bb.0] - 2021-12-10
-### Updated
+### Changed
 - Update Kiali Operator to v1.44.0
 - Update Kiali Server to v1.43.0 (waiting for IB 1.44)
 
 ## [1.42.0-bb.0] - 2021-11-10
-### Updated
+### Changed
 - Update Kiali to v1.42.0
 
 ## [1.40.1-bb.1] - 2021-10-20
-### Updated
+### Changed
 - Added timeout to cypress test
 
 ## [1.40.1-bb.0] - 2021-10-07
-### Updated
-- Updated base kiali image to v1.40.1
-- Updated base kiali-operator image to v1.40.1
-- Updated base kiali-operator helm chart to v1.40.1
-- Updated VS to v1beta1 API version
+### Changed
+- Changed base kiali image to v1.40.1
+- Changed base kiali-operator image to v1.40.1
+- Changed base kiali-operator helm chart to v1.40.1
+- Changed VS to v1beta1 API version
 
 ## [1.39.0-bb.3] - 2021-09-28
 ### Added
@@ -256,29 +260,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added wait script for CI
 
 ## [1.39.0-bb.0] - 2021-08-25
-### Updated
-- Updated base images to v1.39.0
-- Updated base kiali-operator helm chart to v1.39.0
+### Changed
+- Changed base images to v1.39.0
+- Changed base kiali-operator helm chart to v1.39.0
 
 ## [1.37.0-bb.3] - 2021-08-25
-### Updated
+### Changed
 - Increased resource limits and requests to 512Mi due to OOM errors
 
 ## [1.37.0-bb.2] - 2021-08-20
-### Updated
+### Changed
 - Increased resource limits and requests for memory on Kiali operator to prevent OOMKilled errors
 
 ## [1.37.0-bb.1] - 2021-08-16
-### Updated
+### Changed
 - Set resource limits and requests for kiali operator and cr.
 
 ## [1.37.0-bb.0] - 2021-08-03
-### Updated
-- Updated kiali-operator helm chart to v1.37.0
-- Updated kiali images to latest in irobank images v1.37.0
+### Changed
+- Changed kiali-operator helm chart to v1.37.0
+- Changed kiali images to latest in irobank images v1.37.0
 
 ## [1.36.0-bb.3] - 2021-07-21
-### Updated
+### Changed
 - add openshift toggle. conditionally modify networkpolicy for dns
 
 ## [1.36.0-bb.2]
@@ -294,8 +298,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Because of a change in v1.35.0 of Kiali, we added a job to patch svc/kiali created by the Kiali CR (see https://github.com/kiali/kiali/issues/4143#issuecomment-873073251)
 
 ### Changed
-- Updated base images to v1.36.0
-- Updated base kiali-operator helm chart to v1.36.0
+- Changed base images to v1.36.0
+- Changed base kiali-operator helm chart to v1.36.0
 - Removing cr.spec.custom_dashboards from values.yaml. Its function was unclear, and it was throwing errors
 
 ## [1.32.0-bb.2]

@@ -162,7 +162,7 @@ cr:
         - private-registry
       ingress_enabled: false
       accessible_namespaces:
-        - "**"
+        - "kiali"
       logger:
         log_level: info
       resources:
@@ -176,11 +176,12 @@ cr:
         capabilities:
           drop:
             - ALL
+        allowPrivilegeEscalation: false
         privileged: false
-        run_as_non_root: true
-        run_as_group: 2001
-        run_as_user: 2001
-        allow_privilege_escalation: false
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
+        runAsGroup: 1001
+        runAsUser: 1001
 
     auth:
       strategy: "anonymous"
