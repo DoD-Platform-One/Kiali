@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.76.0-bb.2](https://img.shields.io/badge/Version-1.76.0--bb.2-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
+![Version: 1.76.0-bb.3](https://img.shields.io/badge/Version-1.76.0--bb.3-informational?style=flat-square) ![AppVersion: 1.76.0](https://img.shields.io/badge/AppVersion-1.76.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -97,18 +97,19 @@ helm install kiali chart/
 | cr.spec.deployment.image_version | string | `"v1.76.0"` |  |
 | cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | cr.spec.deployment.ingress_enabled | bool | `false` |  |
-| cr.spec.deployment.accessible_namespaces[0] | string | `"**"` |  |
+| cr.spec.deployment.accessible_namespaces[0] | string | `"kiali"` |  |
 | cr.spec.deployment.logger.log_level | string | `"info"` |  |
 | cr.spec.deployment.resources.requests.cpu | string | `"200m"` |  |
 | cr.spec.deployment.resources.requests.memory | string | `"368Mi"` |  |
 | cr.spec.deployment.resources.limits.cpu | string | `"200m"` |  |
 | cr.spec.deployment.resources.limits.memory | string | `"368Mi"` |  |
 | cr.spec.deployment.security_context.capabilities.drop[0] | string | `"ALL"` |  |
+| cr.spec.deployment.security_context.allowPrivilegeEscalation | bool | `false` |  |
 | cr.spec.deployment.security_context.privileged | bool | `false` |  |
-| cr.spec.deployment.security_context.run_as_non_root | bool | `true` |  |
-| cr.spec.deployment.security_context.run_as_group | int | `2001` |  |
-| cr.spec.deployment.security_context.run_as_user | int | `2001` |  |
-| cr.spec.deployment.security_context.allow_privilege_escalation | bool | `false` |  |
+| cr.spec.deployment.security_context.runAsNonRoot | bool | `true` |  |
+| cr.spec.deployment.security_context.readOnlyRootFilesystem | bool | `true` |  |
+| cr.spec.deployment.security_context.runAsGroup | int | `1001` |  |
+| cr.spec.deployment.security_context.runAsUser | int | `1001` |  |
 | cr.spec.auth.strategy | string | `"anonymous"` |  |
 | cr.spec.external_services.custom_dashboards.enabled | bool | `true` |  |
 | cr.spec.external_services.prometheus.url | string | `"http://monitoring-monitoring-kube-prometheus.monitoring.svc.cluster.local:9090"` |  |
