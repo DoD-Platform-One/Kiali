@@ -162,7 +162,7 @@ cr:
         - private-registry
       ingress_enabled: false
       accessible_namespaces:
-        - "kiali"
+        - "**"
       logger:
         log_level: info
       resources:
