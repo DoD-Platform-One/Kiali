@@ -23,7 +23,7 @@ From the root of the repo run, kpt pkg update chart@<v1.x.x> --strategy alpha-gi
 
 # Manual testing steps
 
-1. Browse to https://kiali.bigbang.dev/kiali/ and log on through SSO. 
+1. Browse to https://kiali.bigbang.dev/kiali/ and log on through SSO. Alternatively if you are using anonymous access you can generate the token it asks for with `kubectl -n kiali create token kiali-service-account`.
 
 1. On the main menu, choose Overview and verify that the panels that appear populate and that there are no errors. 
 
