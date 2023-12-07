@@ -1,10 +1,21 @@
 istio:
   enabled: false
 
-
 bbtests:
   enabled: true
+  cypress:
+    resources:
+      requests:
+        cpu: "2"
+        memory: "1500M"
+      limits:
+        cpu: "2"
+        memory: "1500M"
 
 networkPolicies:
   enabled: true
   controlPlaneCidr: 172.16.0.0/12
+
+resources:
+  limits:
+    cpu: "1"

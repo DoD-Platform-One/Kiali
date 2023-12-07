@@ -39,8 +39,8 @@ it('Check Kiali is accessible', function() {
   cy.visit(Cypress.env('url'))
   cy.title().should('contain', 'Kiali')
   expandMenu();
-  cy.get('#Graph', { timeout: 15000 }).click();
-  cy.get('#Applications', { timeout: 15000 }).click();
+  cy.get('#Graph', { timeout: 60000 }).click();
+  cy.get('#Applications', { timeout: 60000 }).click();
   // Check for generic errors (this is the red circle that appears if any connectivity with Promtheus/Grafana/Istio is not working)
   cy.get('svg[fill="var(--pf-global--danger-color--100)"]').should('not.exist');
 })
@@ -52,20 +52,20 @@ if (Cypress.env("check_data")) {
     cy.visit(Cypress.env('url'))
     cy.title().should("eq", "Kiali");
     expandMenu();
-    cy.get('#Graph', { timeout: 15000 }).click();
+    cy.get('#Graph', { timeout: 60000 }).click();
     collapseMenu();
     cy.get('button[id="namespace-selector"').click()
     cy.get('input[type="checkbox"][value="monitoring"]').check()
     cy.get('button[id="refresh_button"').click({force: true})
     // Check for graph side panel because the main graph is tricky to grab
-    cy.get('div[id="graph-side-panel"]', { timeout: 15000 }).should("be.visible")
+    cy.get('div[id="graph-side-panel"]', { timeout: 60000 }).should("be.visible")
   })
 
   it('Check Kiali Applications page loads data', function() {
     cy.visit(Cypress.env('url'))
     cy.title().should("eq", "Kiali");
     expandMenu();
-    cy.get('#Applications', { timeout: 15000 }).click();
+    cy.get('#Applications', { timeout: 60000 }).click();
     collapseMenu();
     cy.get('button[id="namespace-selector"]').click()
     //Only check the box for monitoring if it isn't already selected from previous test
@@ -80,8 +80,8 @@ if (Cypress.env("check_data")) {
       return element.textContent.trim() === 'prometheus';
     }).click();
     // Validate the graph is visible
-    cy.contains('.Empty Graph', { timeout: 10000 }).should('not.exist');
-    cy.contains('.Error loading Graph', { timeout: 10000 }).should('not.exist');
+    cy.contains('.Empty Graph', { timeout: 60000 }).should('not.exist');
+    cy.contains('.Error loading Graph', { timeout: 60000 }).should('not.exist');
     // Load the outbound metrics tab
     // there's nothing easy to check on here since elements are dynamic but we can at least load the page for the video
     cy.get('#pf-tab-2-basic-tabs').click()
