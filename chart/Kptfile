@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: 07513195cc69531ca39c8829327f5290f46d9119
+    commit: e197b95396a3a626f815ad8ccbb498f2097e31d8
     repo: https://github.com/kiali/helm-charts.git
     directory: /kiali-operator
-    ref: v1.76.0
+    ref: v1.78.0
