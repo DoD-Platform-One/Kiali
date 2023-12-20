@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.78.0-bb.0](https://img.shields.io/badge/Version-1.78.0--bb.0-informational?style=flat-square) ![AppVersion: 1.78.0](https://img.shields.io/badge/AppVersion-1.78.0-informational?style=flat-square)
+![Version: 1.78.0-bb.1](https://img.shields.io/badge/Version-1.78.0--bb.1-informational?style=flat-square) ![AppVersion: 1.78.0](https://img.shields.io/badge/AppVersion-1.78.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -46,7 +46,7 @@ helm install kiali chart/
 | istio.mtls.mode | string | `"STRICT"` |  |
 | port | int | `20001` |  |
 | image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| image.tag | string | `"v1.77.1"` |  |
+| image.tag | string | `"v1.78.0"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
