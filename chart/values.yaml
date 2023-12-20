@@ -20,7 +20,7 @@ port: 20001
 image:
   # repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
   repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-  tag: v1.77.1
+  tag: v1.78.0
   digest: "" # use "sha256" if tag is a sha256 hash (do NOT prefix this value with a "@")
   pullPolicy: IfNotPresent
   pullSecrets:
