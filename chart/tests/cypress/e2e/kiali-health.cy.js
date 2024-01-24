@@ -5,11 +5,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 before(() => {
   if (Cypress.env('keycloak_test_enable')) {
         cy.visit(Cypress.env('url'))
-        cy.get('input[id="username"]').type(Cypress.env('tnr_username'))
-        cy.get('input[id="password"]').type(Cypress.env('tnr_password'))
-        cy.get('input[id="kc-login"]').click()
-        cy.get('input[id="kc-accept"]').click()
-        cy.get('input[id="kc-login"]').click()
+        cy.performKeycloakLogin(Cypress.env('tnr_username'), Cypress.env('tnr_password'))
   }
 })
 

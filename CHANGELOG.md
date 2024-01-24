@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.78.0-bb.2] - 2024-01-18
+### Changed
+- Updated gluon to 4.7 to allow consumers to utilize custom cypress scripts
+
 ## [1.78.0-bb.1] - 2023-12-18
 ### Changed
 - Updated registry1.dso.mil/ironbank/opensource/kiali/kiali-operator to 1.78.0 
