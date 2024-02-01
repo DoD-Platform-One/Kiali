@@ -1,0 +1,12 @@
+{{- if and .Values.istio.enabled .Values.istio.registryOnly }}
+apiVersion: networking.istio.io/v1beta1
+kind: Sidecar
+metadata:
+  name: registry-only
+  namespace: {{.Release.Namespace}}
+  labels:
+    name: kiali
+spec:
+  outboundTrafficPolicy:
+    mode: REGISTRY_ONLY
+{{- end }}
