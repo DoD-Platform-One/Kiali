@@ -3,17 +3,21 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.78.0-bb.3] - 2024-01-30
+### Added
+- Added Istio Sidecar resource to restrict Egress to REGISTRY_ONLY
+
 ## [1.78.0-bb.2] - 2024-01-18
 ### Changed
 - Updated gluon to 4.7 to allow consumers to utilize custom cypress scripts
 
 ## [1.78.0-bb.1] - 2023-12-18
 ### Changed
-- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali-operator to 1.78.0 
+- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali-operator to 1.78.0
 
 ## [1.78.0-bb.0] - 2023-12-12
 ### Changed
-- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.78.0 
+- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.78.0
 
 ## [1.77.1-bb.1] - 2023-12-06
 ### Changed
@@ -46,11 +50,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.76.0-bb.0] - 2023-11-01
 ### Changed
-- Changed registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.76.0 
+- Changed registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.76.0
 
 ## [1.74.0-bb.4] - 2023-10-26
 ### Added
-- Changed to 1.75.1 images (latest in IB) 
+- Changed to 1.75.1 images (latest in IB)
 
 ## [1.74.0-bb.3] - 2023-10-19
 ### Changed
@@ -191,9 +195,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.50.0-bb.1] - 2022-05-26
 ### Changed
-- Changed CI /test/wait.sh. The Big Bang CI infra RKE2 pipeline was failing after the last Kiali upgrade. 
+- Changed CI /test/wait.sh. The Big Bang CI infra RKE2 pipeline was failing after the last Kiali upgrade.
 
-## [1.50.0-bb.0] - 2022-05-23 
+## [1.50.0-bb.0] - 2022-05-23
 ### Changed
 - Changed to 1.50.0 images (latest in IB)
 
