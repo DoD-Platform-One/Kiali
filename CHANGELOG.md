@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.78.0-bb.4] - 2024-02-02
+### Added
+- Added template to allow end users to define ServiceEntries for external hostnames/endpoints to add to the istio service registry.
+- Updated creation of new istio resources to be reliant on the value of `.Values.istio.hardened.enabled`
+
 ## [1.78.0-bb.3] - 2024-01-30
 ### Added
 - Added Istio Sidecar resource to restrict Egress to REGISTRY_ONLY
