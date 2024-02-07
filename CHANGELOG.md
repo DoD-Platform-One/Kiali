@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.78.0-bb.5] - 2024-02-07
+### Changed
+- Made outboundTrafficPolicy.mode in `Sidecar` configurable
+
 ## [1.78.0-bb.4] - 2024-02-02
 ### Added
 - Added template to allow end users to define ServiceEntries for external hostnames/endpoints to add to the istio service registry.

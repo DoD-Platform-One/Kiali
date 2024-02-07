@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.78.0-bb.4](https://img.shields.io/badge/Version-1.78.0--bb.4-informational?style=flat-square) ![AppVersion: 1.78.0](https://img.shields.io/badge/AppVersion-1.78.0-informational?style=flat-square)
+![Version: 1.78.0-bb.5](https://img.shields.io/badge/Version-1.78.0--bb.5-informational?style=flat-square) ![AppVersion: 1.78.0](https://img.shields.io/badge/AppVersion-1.78.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -42,6 +42,7 @@ helm install kiali chart/
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
 | istio.kiali.gateways[0] | string | `"istio-system/main"` |  |
 | istio.kiali.hosts[0] | string | `"kiali.{{ .Values.domain }}"` |  |
