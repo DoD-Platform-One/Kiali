@@ -3,11 +3,11 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Sidecar
 metadata:
-  name: registry-only
+  name: {{ .Release.Name }}-sidecar
   namespace: {{.Release.Namespace}}
   labels:
     name: kiali
 spec:
   outboundTrafficPolicy:
-    mode: REGISTRY_ONLY
+    mode: {{ .Values.istio.hardened.outboundTrafficPolicyMode }}
 {{- end }}

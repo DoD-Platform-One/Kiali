@@ -7,6 +7,7 @@ istio:
   enabled: false
   hardened:
     enabled: false
+    outboundTrafficPolicyMode: "REGISTRY_ONLY"
     customServiceEntries: []
       # - name: "allow-google"
       #   enabled: true
