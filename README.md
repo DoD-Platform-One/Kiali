@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.78.0-bb.5](https://img.shields.io/badge/Version-1.78.0--bb.5-informational?style=flat-square) ![AppVersion: 1.78.0](https://img.shields.io/badge/AppVersion-1.78.0-informational?style=flat-square)
+![Version: 1.80.0-bb.0](https://img.shields.io/badge/Version-1.80.0--bb.0-informational?style=flat-square) ![AppVersion: 1.80.0](https://img.shields.io/badge/AppVersion-1.80.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -49,7 +49,7 @@ helm install kiali chart/
 | istio.mtls.mode | string | `"STRICT"` |  |
 | port | int | `20001` |  |
 | image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| image.tag | string | `"v1.78.0"` |  |
+| image.tag | string | `"v1.80.0"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -97,7 +97,7 @@ helm install kiali chart/
 | cr.spec.istio_component_namespaces.tracing | string | `"jaeger"` |  |
 | cr.spec.istio_namespace | string | `"istio-system"` |  |
 | cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| cr.spec.deployment.image_version | string | `"v1.78.0"` |  |
+| cr.spec.deployment.image_version | string | `"v1.80.0"` |  |
 | cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | cr.spec.deployment.ingress_enabled | bool | `false` |  |
 | cr.spec.deployment.accessible_namespaces[0] | string | `"**"` |  |
