@@ -28,7 +28,7 @@ From the root of the repo run, kpt pkg update chart@<v1.x.x> --strategy alpha-gi
 
 1. On the main menu, choose Overview and verify that the panels that appear populate and that there are no errors. 
 
-1. Still on the main menu, choose Workloads, then kiali. Click Inbound Metrics, then Outbound Metrics. Verify that graphs populate for at least some of the items in both.
+1. Still on the main menu, choose Workloads, then kiali (if you see "no namespace is selected" here you may need to select the kiali namespace in the Select Namespaces drop-down menu). Click Inbound Metrics, then Outbound Metrics. Verify that graphs populate for at least some of the items in both.
 
 1. Click on Traces and verify that at least some traces appear on the graph. 
 
