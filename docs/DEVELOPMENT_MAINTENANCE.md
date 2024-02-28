@@ -1,4 +1,5 @@
 # Code Changes for Updates/Renovates
+**NOTE:** Updated kiali-operator images can be requested by creating an issue in the Iron Bank kiali-operator [project](https://repo1.dso.mil/dsop/opensource/kiali/kiali-operator/-/issues)
 
 1. Checkout renovate/ironbank branch
 
