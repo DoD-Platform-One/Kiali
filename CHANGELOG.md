@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.80.0-bb.1] - 2024-03-04
+### Added
+- New ServiceEntries for SSO, grafana, and tracing services
+
 ## [1.80.0-bb.0] - 2024-02-28
 ### Changed
 - Updated kiali and kiali-operator images updated to v1.80.0
