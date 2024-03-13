@@ -1,6 +1,6 @@
 # kiali
 
-![Version: 1.80.0-bb.1](https://img.shields.io/badge/Version-1.80.0--bb.1-informational?style=flat-square) ![AppVersion: 1.80.0](https://img.shields.io/badge/AppVersion-1.80.0-informational?style=flat-square)
+![Version: 1.80.0-bb.2](https://img.shields.io/badge/Version-1.80.0--bb.2-informational?style=flat-square) ![AppVersion: 1.80.0](https://img.shields.io/badge/AppVersion-1.80.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -42,8 +42,17 @@ helm install kiali chart/
 | domain | string | `"bigbang.dev"` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
+| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
+| istio.hardened.monitoring.enabled | bool | `true` |  |
+| istio.hardened.monitoring.namespaces[0] | string | `"monitoring"` |  |
+| istio.hardened.monitoring.principals[0] | string | `"cluster.local/ns/monitoring/sa/monitoring-grafana"` |  |
+| istio.hardened.monitoring.principals[1] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-alertmanager"` |  |
+| istio.hardened.monitoring.principals[2] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-operator"` |  |
+| istio.hardened.monitoring.principals[3] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-prometheus"` |  |
+| istio.hardened.monitoring.principals[4] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-state-metrics"` |  |
+| istio.hardened.monitoring.principals[5] | string | `"cluster.local/ns/monitoring/sa/monitoring-monitoring-prometheus-node-exporter"` |  |
 | istio.kiali.gateways[0] | string | `"istio-system/main"` |  |
 | istio.kiali.hosts[0] | string | `"kiali.{{ .Values.domain }}"` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
