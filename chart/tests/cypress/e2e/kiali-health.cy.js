@@ -35,8 +35,8 @@ it('Check Kiali is accessible', function() {
   cy.visit(Cypress.env('url'))
   cy.title().should('contain', 'Kiali')
   expandMenu();
-  cy.get('#Traffic\\ Graph', { timeout: 60000 }).click();
-  cy.get('#Applications', { timeout: 60000 }).click();
+  cy.get('#traffic_graph_cy', { timeout: 60000 }).click();
+  cy.get('#applications', { timeout: 60000 }).click();
   // Check for generic errors (this is the red circle that appears if any connectivity with Promtheus/Grafana/Istio is not working)
   cy.get('svg[fill="var(--pf-global--danger-color--100)"]').should('not.exist');
 })
@@ -48,7 +48,7 @@ if (Cypress.env("check_data")) {
     cy.visit(Cypress.env('url'))
     cy.title().should("eq", "Kiali");
     expandMenu();
-    cy.get('#Traffic\\ Graph', { timeout: 60000 }).click();
+    cy.get('#traffic_graph_cy', { timeout: 60000 }).click();
     collapseMenu();
     cy.get('button[id="namespace-selector"').click()
     cy.get('input[type="checkbox"][value="monitoring"]').check()
@@ -61,7 +61,7 @@ if (Cypress.env("check_data")) {
     cy.visit(Cypress.env('url'))
     cy.title().should("eq", "Kiali");
     expandMenu();
-    cy.get('#Applications', { timeout: 60000 }).click();
+    cy.get('#applications', { timeout: 60000 }).click();
     collapseMenu();
     cy.get('button[id="namespace-selector"]').click()
     //Only check the box for monitoring if it isn't already selected from previous test
