@@ -8,7 +8,6 @@
     "enabledManagers": ["helm-values","regex", "helmv3"],
     "ignorePaths": ["chart/charts/**"],
     "labels": ["kiali","renovate"],
-    "commitMessagePrefix": "SKIP UPDATE CHECK",
     "packageRules": [
         {
           "matchDatasources": ["docker"],
