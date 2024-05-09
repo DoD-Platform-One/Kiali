@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.83.0-bb.0] - 2024-05-08
+### Changed
+- Updated Kiali to v1.83.0
+- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali-operator to 1.83.0
+
 ## [1.82.0-bb.3] - 2024-04-09
 ### Changed
 - Update annotations tag to 1.82.0
