@@ -1,7 +1,7 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:4c5ac189-00a5-4e40-b6e9-6c9d6d1fe062",
+  "serialNumber": "urn:uuid:5ee3c6ee-8f98-4c3e-9e12-ff4ca2cf39f4",
   "version": 1,
   "metadata": {
     "tools": null,
@@ -19377,7 +19377,7 @@
               "expression": "Apache-2.0 OR BSD-3-Clause"
             }
           ],
-          "cpe": "cpe:2.3:a:python-cryptography_project:python-cryptography:42.0.5:*:*:*:*:*:*:*",
+          "cpe": "cpe:2.3:a:cryptography_project:cryptography:42.0.5:*:*:*:*:python:*:*",
           "purl": "pkg:pypi/cryptography@42.0.5",
           "properties": [
             {
@@ -19398,7 +19398,7 @@
             },
             {
               "name": "syft:cpe23",
-              "value": "cpe:2.3:a:cryptography_project:cryptography:42.0.5:*:*:*:*:python:*:*"
+              "value": "cpe:2.3:a:python-cryptography_project:python-cryptography:42.0.5:*:*:*:*:*:*:*"
             },
             {
               "name": "syft:location:0:layerID",
