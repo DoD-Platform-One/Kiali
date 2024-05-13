@@ -11,11 +11,11 @@
 
 Iron Bank will initially push the updated kiali-operator image to staging at a url such as:
 
-registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.82.0
+registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.84.0
 
 Update the references to the kiali-operator in chart/Chart.yaml and chart/values.yaml to point to this image in staging, then continue to follow the steps below to finsih updating Kiali on your branch. When done updating your branch, deploy and test Kiali with the manual testing steps in the next section. Once the package pipeline passes and Kiali passes all the manual testing steps, let Iron Bank know that they can push the kiali-operator image to production. Once the kiali-operator image is in production, you'll want to point to the production image by editing chart/Chart.yaml and chart/values.yaml again to point to the produciton image. For example:
 
-registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.82.0
+registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.84.0
 
 You'll also need to regenerate your README.md. Then confirm that the package pipeline passes with these changes and test again with the manual testing steps below before putting your MR in review status. 
 
@@ -52,3 +52,7 @@ Note: The notification bell on the upper right will be red and you will see erro
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads). 
 
 This policy revokes access to the K8s API for Pods utilizing said ServiceAccounts. If a Pod truly requires access to the K8s API (for app functionality), the Pod is added to the `pods:` array of the same mutating policy. This grants the Pod access to the API, and creates a Kyverno PolicyException to prevent an alert.
+
+# Modifications made to the upstream chart
+## chart/values.yaml
+- Ensure renovate does not remove `oidcCaCert` key and associated comment. This corresponds to `chart/templates/bigbang/oidc-ca-cm.yaml` added in [#52](https://repo1.dso.mil/big-bang/product/packages/kiali/-/issues/52)
