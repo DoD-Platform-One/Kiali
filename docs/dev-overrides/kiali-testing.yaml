@@ -1,0 +1,53 @@
+# This overrides file is for deploying only the packages needed to test kiali during renovate or other update/change work, and should be used in combination with the testing steps called out in docs/DEVELOPMENT_MAINTENANCE.md
+# This is meant to be combined with the https://repo1.dso.mil/big-bang/bigbang/-/raw/master/docs/assets/configs/example/dev-sso-values.yaml file for SSO against login.dso.mil
+# Please use docs/dev-overrides/kiali-testing-local-keycloak.yaml for testing with a local keycloak instead
+
+# Sample deploy command, to be run from the package repo root:
+# helm upgrade -i bigbang <absolute_path_to_local_bigbang_repo>/chart/ -n bigbang --create-namespace \
+# --set registryCredentials.username=${REGISTRY_USERNAME} --set registryCredentials.password=${REGISTRY_PASSWORD} \
+# -f https://repo1.dso.mil/big-bang/bigbang/-/raw/master/tests/test-values.yaml \
+# -f https://repo1.dso.mil/big-bang/bigbang/-/raw/master/chart/ingress-certs.yaml \
+# -f https://repo1.dso.mil/big-bang/bigbang/-/raw/master/docs/assets/configs/example/dev-sso-values.yaml \
+# -f docs/dev-overrides/minimal.yaml \
+# -f docs/dev-overrides/kiali-testing.yaml
+
+sso:
+  # This is needed because test-values.yaml overrides it to reference the internal keycloak
+  url: https://login.dso.mil/auth/realms/baby-yoda
+
+istio:
+  enabled: true
+  ingressGateways:
+    passthrough-ingressgateway:
+      enabled: false
+
+istioOperator:
+  enabled: true
+
+monitoring:
+  enabled: true
+
+grafana:
+  enabled: true
+
+jaeger:
+  enabled: true
+
+kiali:
+  enabled: true
+  # For some reason kiali doesn't trust the CA for the login.dso.mil cert, even though it works fine for other apps, need to look into this to enable SSO here
+  # 2024-05-17T18:53:48Z WRN Error when fetching OpenID provider's metadata: Get "https://login.dso.mil/auth/realms/baby-yoda/.well-known/openid-configuration": tls: failed to verify certificate: x509: certificate signed by unknown authority
+  # values:
+  #   cr:
+  #     spec:
+  #       auth:
+  #         strategy: "openid"
+  # Add git branch or tag information to test against a specific branch or tag instead of using `main`
+  # Must set the unused label to null
+  # git:
+  #   tag: null
+  #   branch: "renovate/ironbank"
+
+addons:
+  authservice:
+    enabled: true
