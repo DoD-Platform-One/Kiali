@@ -1,0 +1,54 @@
+# This overrides file is for deploying only the packages needed to test kiali during renovate or other update/change work, and should be used in combination with the testing steps called out in docs/DEVELOPMENT_MAINTENANCE.md
+# This is for deploying with a local keycloak (keycloak.dev.bigbang.mil)
+# Please use docs/dev-overrides/kiali-testing.yaml for testing with the login.dso.mil keycloak instead
+
+# Sample deploy command, to be run from the package repo root:
+# helm upgrade -i bigbang <absolute_path_to_local_bigbang_repo>/chart/ -n bigbang --create-namespace \
+# --set registryCredentials.username=${REGISTRY_USERNAME} --set registryCredentials.password=${REGISTRY_PASSWORD} \
+# -f https://repo1.dso.mil/big-bang/bigbang/-/raw/master/tests/test-values.yaml \
+# -f https://repo1.dso.mil/big-bang/bigbang/-/raw/master/chart/ingress-certs.yaml \
+# -f docs/dev-overrides/minimal.yaml \
+# -f docs/dev-overrides/kiali-testing.yaml
+
+istio:
+  enabled: true
+
+istioOperator:
+  enabled: true
+
+monitoring:
+  enabled: true
+  sso:
+    enabled: true
+
+grafana:
+  enabled: true
+  sso:
+    enabled: true
+
+jaeger:
+  enabled: true
+  sso:
+    enabled: true
+
+kiali:
+  enabled: true
+  sso:
+    enabled: true
+  values:
+    cr:
+      spec:
+        auth:
+          strategy: "openid"
+  # Add git branch or tag information to test against a specific branch or tag instead of using `main`
+  # Must set the unused label to null
+  # git:
+  #   tag: null
+  #   branch: "renovate/ironbank"
+
+addons:
+  keycloak:
+    enabled: true
+
+  authservice:
+    enabled: true
