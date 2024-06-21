@@ -4,7 +4,7 @@
 
 **NOTE:** Updated kiali-operator images can be requested by creating an issue in the [Iron Bank kiali-operator project](https://repo1.dso.mil/dsop/opensource/kiali/kiali-operator/-/issues)
 
-1. Checkout the [renovate/ironbank branch](../../tree/renovate/ironbank).
+1. Checkout the `renovate/ironbank` branch.
 1. Check the [upstream repo](https://github.com/kiali/helm-charts/tags) for chart updates.
 1. Note that Iron Bank does not automatically update kiali-operator with Renovate. Verify that the version of the kiali image to which you'll be updating and the kiali-operator version match (to do this look at how the MR will change the `annotation.helm.sh/images` section in [chart/Chart.yaml](../chart/Chart.yaml)).
     - If the kiali and kiali-operator image versions match, proceed to the next step that handles upgrading the chart with kpt.
