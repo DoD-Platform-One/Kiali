@@ -38,13 +38,11 @@ jaeger:
 
 kiali:
   enabled: true
-  # For some reason kiali doesn't trust the CA for the login.dso.mil cert, even though it works fine for other apps, need to look into this to enable SSO here
-  # 2024-05-17T18:53:48Z WRN Error when fetching OpenID provider's metadata: Get "https://login.dso.mil/auth/realms/baby-yoda/.well-known/openid-configuration": tls: failed to verify certificate: x509: certificate signed by unknown authority
-  # values:
-  #   cr:
-  #     spec:
-  #       auth:
-  #         strategy: "openid"
+  values:
+    cr:
+      spec:
+        auth:
+          strategy: "openid"
   # Add git branch or tag information to test against a specific branch or tag instead of using `main`
   # Must set the unused label to null
   # git:
