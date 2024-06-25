@@ -21,17 +21,6 @@ istio:
       #         protocol: TLS
       #         name: https
       #     resolution: DNS
-    monitoring:
-      enabled: true
-      namespaces:
-        - monitoring
-      principals:
-        - cluster.local/ns/monitoring/sa/monitoring-grafana
-        - cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-alertmanager
-        - cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-operator
-        - cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-prometheus
-        - cluster.local/ns/monitoring/sa/monitoring-monitoring-kube-state-metrics
-        - cluster.local/ns/monitoring/sa/monitoring-monitoring-prometheus-node-exporter
     
   kiali:
     gateways:
