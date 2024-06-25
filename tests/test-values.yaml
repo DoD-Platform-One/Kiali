@@ -1,9 +1,5 @@
 istio:
   enabled: true
-  hardened:
-    enabled: true
-    monitoring:
-      enabled: true
 
 bbtests:
   enabled: true
