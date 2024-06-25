@@ -153,7 +153,7 @@ This will deploy the following apps for testing:
 
 ⚠️ In the Kiali web interface, the notification bell on the upper right will sometimes be red and you will see error pop-ups near it as you move between screens if there are errors. Errors on individual application listings for labels, annotations, etc are expected and OK.
 
-1. Navigate to [Kiali](https://kiali.dev.bigbang.mil/) and validate you are prompted to login with SSO and that the login is successful.
+1. Navigate to Kiali (https://kiali.dev.bigbang.mil/) and validate you are prompted to login with SSO and that the login is successful.
 1. On the main menu, choose `Overview` and verify that the panels that appear populate and that there are no errors.
 1. Still on the main menu, choose `Workloads`, then `Kiali` (if you see "no namespace is selected" here you may need to select the Kiali namespace in the `Select Namespaces` drop-down menu).
     - Check both `Inbound Metrics` and `Outbound Metrics`. Verify that graphs populate for at least some of the items in each. *Note: Sometimes it takes a while for the graphs to populate on the Inbound Metrics tab. Logging on to grafana.bigbang.dev and clicking around for a while tends to speed this up.*
