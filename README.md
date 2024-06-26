@@ -2,9 +2,10 @@
 
 ![Version: 1.86.0-bb.2](https://img.shields.io/badge/Version-1.86.0--bb.2-informational?style=flat-square) ![AppVersion: 1.86.0](https://img.shields.io/badge/AppVersion-1.86.0-informational?style=flat-square)
 
-Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
+Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
 
 ## Upstream References
+
 * <https://github.com/kiali/kiali-operator>
 
 * <https://github.com/kiali/kiali>
@@ -12,6 +13,7 @@ Kiali is an open source project for service mesh observability, refer to https:/
 * <https://github.com/kiali/helm-charts>
 
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -23,12 +25,13 @@ Kiali is an open source project for service mesh observability, refer to https:/
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install kiali chart/
 ```
