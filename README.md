@@ -1,11 +1,10 @@
 # kiali
 
-![Version: 1.86.0-bb.2](https://img.shields.io/badge/Version-1.86.0--bb.2-informational?style=flat-square) ![AppVersion: 1.86.0](https://img.shields.io/badge/AppVersion-1.86.0-informational?style=flat-square)
+![Version: 1.86.2-bb.0](https://img.shields.io/badge/Version-1.86.2--bb.0-informational?style=flat-square) ![AppVersion: 1.86.2](https://img.shields.io/badge/AppVersion-1.86.2-informational?style=flat-square)
 
-Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
+Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
 ## Upstream References
-
 * <https://github.com/kiali/kiali-operator>
 
 * <https://github.com/kiali/kiali>
@@ -13,7 +12,6 @@ Kiali is an open source project for service mesh observability, refer to <https:
 * <https://github.com/kiali/helm-charts>
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -25,13 +23,12 @@ Kiali is an open source project for service mesh observability, refer to <https:
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install kiali chart/
 ```
@@ -53,7 +50,7 @@ helm install kiali chart/
 | istio.mtls.mode | string | `"STRICT"` |  |
 | port | int | `20001` |  |
 | image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| image.tag | string | `"v1.86.0"` |  |
+| image.tag | string | `"v1.86.2"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -102,7 +99,7 @@ helm install kiali chart/
 | cr.spec.istio_component_namespaces.tracing | string | `"jaeger"` |  |
 | cr.spec.istio_namespace | string | `"istio-system"` |  |
 | cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| cr.spec.deployment.image_version | string | `"v1.86.0"` |  |
+| cr.spec.deployment.image_version | string | `"v1.86.2"` |  |
 | cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | cr.spec.deployment.ingress_enabled | bool | `false` |  |
 | cr.spec.deployment.accessible_namespaces[0] | string | `"**"` |  |
