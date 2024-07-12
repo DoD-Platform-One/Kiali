@@ -1,8 +1,8 @@
 apiVersion: v2
 name: kiali
 description: Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
-version: 1.86.2-bb.0
-appVersion: 1.86.2
+version: 1.87.0-bb.0
+appVersion: 1.87.0
 home: https://github.com/kiali/kiali-operator
 maintainers:
 - name: Kiali
@@ -23,9 +23,9 @@ dependencies:
     repository: "oci://registry1.dso.mil/bigbang"
 annotations:
   bigbang.dev/applicationVersions: |
-    - Kiali: 1.86.2
+    - Kiali: 1.87.0
   helm.sh/images: |
     - name: kiali
-      image: registry1.dso.mil/ironbank/opensource/kiali/kiali:v1.86.2
+      image: registry1.dso.mil/ironbank/opensource/kiali/kiali:v1.87.0
     - name: kiali-operator
-      image: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.86.2
+      image: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.87.0

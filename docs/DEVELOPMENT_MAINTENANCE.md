@@ -25,10 +25,10 @@
 ## Testing kiali-operator image updates
 
 Iron Bank will initially push the updated kiali-operator image to staging at a url such as: `registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.84.0`
+⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging ` project with your registry1 user account. 
 
 1. Update the references to the kiali-operator in [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) to point to this image in staging.
-1. Follow the steps below to finish updating Kiali on your branch.
-1. When you're finished updating your branch, deploy and test Kiali with the [testing steps below](#testing-kiali-updates).
+1. Follow the steps above in the `Code Changes for Updates/Renovates` section to finish updating Kiali on your branch.
 1. Once the package pipeline passes and Kiali passes all the testing steps, let Iron Bank know that they can push the kiali-operator image to production via the [BB <-> IB channel in IL4 Mattermost](https://chat.il4.dso.mil/platform-one/channels/bbib-coordination-and-collaboration).
 1. Once the kiali-operator image is in production, you'll want to point to the production image by editing [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) again to point to the production image. For example: `registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.84.0`.
 1. Generate the [README.md](../README.md) using the [gluon library script](https://repo1.dso.mil/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md) guidelines noting any additional chart changes you make during development testing.
@@ -158,7 +158,7 @@ This will deploy the following apps for testing:
 1. Still on the main menu, choose `Workloads`, then `Kiali` (if you see "no namespace is selected" here you may need to select the Kiali namespace in the `Select Namespaces` drop-down menu).
     - Check both `Inbound Metrics` and `Outbound Metrics`. Verify that graphs populate for at least some of the items in each. *Note: Sometimes it takes a while for the graphs to populate on the Inbound Metrics tab. Logging on to grafana.bigbang.dev and clicking around for a while tends to speed this up.*
 1. Click on `Traces` and verify that at least some traces appear on the graph.
-1. Once you've confirmed that the package tests above pass, also test your branches against Big Bang per the steps in [this document](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md).
+1. Once you've confirmed that the package tests above pass, also test your branch against Big Bang per the steps in [this document](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md).
 
 ## automountServiceAccountToken
 
