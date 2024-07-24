@@ -25,7 +25,7 @@
 ## Testing kiali-operator image updates
 
 Iron Bank will initially push the updated kiali-operator image to staging at a url such as: `registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.84.0`
-⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging ` project with your registry1 user account. 
+⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging ` project with your registry1 user account.
 
 1. Update the references to the kiali-operator in [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) to point to this image in staging.
 1. Follow the steps above in the `Code Changes for Updates/Renovates` section to finish updating Kiali on your branch.
@@ -159,6 +159,30 @@ This will deploy the following apps for testing:
     - Check both `Inbound Metrics` and `Outbound Metrics`. Verify that graphs populate for at least some of the items in each. *Note: Sometimes it takes a while for the graphs to populate on the Inbound Metrics tab. Logging on to grafana.bigbang.dev and clicking around for a while tends to speed this up.*
 1. Click on `Traces` and verify that at least some traces appear on the graph.
 1. Once you've confirmed that the package tests above pass, also test your branch against Big Bang per the steps in [this document](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md).
+
+## Files That Require Integration Testing
+
+- ./chart/templates/bigbang/grafanaServiceEntry.yaml
+- ./chart/templates/bigbang/istio/authorizationPolicies/allow-intra-namespace-policy.yaml
+- ./chart/templates/bigbang/istio/authorizationPolicies/ingressgateway-authz-policy.yaml
+- ./chart/templates/bigbang/istio/authorizationPolicies/template.yaml
+- ./chart/templates/bigbang/kiali-clusterrolebinding-openshift-scc.yaml
+- ./chart/templates/bigbang/network-attachment-definition.yaml
+- ./chart/templates/bigbang/networkpolicies/additional-networkpolicies.yaml
+- ./chart/templates/bigbang/networkpolicies/egress-kube-dns.yaml
+- ./chart/templates/bigbang/networkpolicies/helm-test-egress.yaml
+- ./chart/templates/bigbang/oidc-ca-cm.yaml
+- ./chart/templates/bigbang/peerAuthentication.yaml
+- ./chart/templates/bigbang/serviceEntry.yaml
+- ./chart/templates/bigbang/sidecar.yaml
+- ./chart/templates/bigbang/ssoServiceEntry.yaml
+- ./chart/templates/bigbang/svc-patch-job.yaml
+- ./chart/templates/bigbang/tracingServiceEntry.yaml
+- ./chart/templates/bigbang/virtualservice.yaml
+
+### Instructions for Integration Testing
+
+See the [Big Bang Doc](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads)
 
 ## automountServiceAccountToken
 
