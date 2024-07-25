@@ -29,3 +29,5 @@ annotations:
       image: registry1.dso.mil/ironbank/opensource/kiali/kiali:v1.87.0
     - name: kiali-operator
       image: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.87.0
+  bigbang.dev/upstreamReleaseNotesMarkdown: |
+    - [Find upstream chart's release notes and CHANGELOG here](https://kiali.io/news/release-notes/)

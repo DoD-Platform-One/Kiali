@@ -1,17 +1,24 @@
+<!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
 ![Version: 1.87.0-bb.0](https://img.shields.io/badge/Version-1.87.0--bb.0-informational?style=flat-square) ![AppVersion: 1.87.0](https://img.shields.io/badge/AppVersion-1.87.0-informational?style=flat-square)
 
-Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
+Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
 
 ## Upstream References
+
 * <https://github.com/kiali/kiali-operator>
 
 * <https://github.com/kiali/kiali>
 * <https://github.com/kiali/kiali-operator>
 * <https://github.com/kiali/helm-charts>
 
+### Upstream Release Notes
+
+* [Find upstream chart's release notes and CHANGELOG here](https://kiali.io/news/release-notes/)
+
 ## Learn More
+
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -23,12 +30,13 @@ Kiali is an open source project for service mesh observability, refer to https:/
 
 Install Helm
 
-https://helm.sh/docs/intro/install/
+<https://helm.sh/docs/intro/install/>
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
+
 ```bash
 helm install kiali chart/
 ```
@@ -155,3 +163,7 @@ helm install kiali chart/
 ## Contributing
 
 Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in contributing.
+
+---
+
+_This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
