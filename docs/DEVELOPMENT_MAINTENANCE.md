@@ -25,7 +25,7 @@
 ## Testing kiali-operator image updates
 
 Iron Bank will initially push the updated kiali-operator image to staging at a url such as: `registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.84.0`
-⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging ` project with your registry1 user account.
+⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging` project with your registry1 user account.
 
 1. Update the references to the kiali-operator in [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) to point to this image in staging.
 1. Follow the steps above in the `Code Changes for Updates/Renovates` section to finish updating Kiali on your branch.
