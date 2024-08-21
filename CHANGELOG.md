@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [1.89.0-bb.0] - 2024-08-20
+
+### Changed
+
+- Updated Kiali to v1.89.0
+- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali to 1.89.0
+- Updated registry1.dso.mil/ironbank/opensource/kiali/kiali-operator to 1.89.1
+
 ## [1.88.0-bb.0] - 2024-08-16
 
 ### Changed
