@@ -3,6 +3,9 @@ fullnameOverride: ""
 
 domain: bigbang.dev
 
+sso:
+  enabled: false
+
 istio:
   enabled: false
   hardened:
@@ -21,7 +24,7 @@ istio:
       #         protocol: TLS
       #         name: https
       #     resolution: DNS
-    
+
   kiali:
     gateways:
       - "istio-system/main"

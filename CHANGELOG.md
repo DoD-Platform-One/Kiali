@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [1.89.0-bb.1] - 2024-09-05
+
+### Added
+
+- Added `sso` key that defaults to false. Needed for downstream changes that rely on this in `chart/templates/bigbang/ssoServiceEntry.yaml` and `chart/templates/bigbang/networkpolicies/egress-sso.yml`.
+
+### Changed
+
+- Updated `chart/templates/bigbang/ssoServiceEntry.yaml` and `chart/templates/bigbang/networkpolicies/egress-sso.yml` to use the sso key to check before assuming that `cr.spec.auth.openid.issuer_uri` is set just because `cr.spec.auth.strategy` is `"openid"`.
 
 ## [1.89.0-bb.0] - 2024-08-20
 

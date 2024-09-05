@@ -1,13 +1,11 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 1.89.0-bb.0](https://img.shields.io/badge/Version-1.89.0--bb.0-informational?style=flat-square) ![AppVersion: 1.89.0](https://img.shields.io/badge/AppVersion-1.89.0-informational?style=flat-square)
+![Version: 1.89.0-bb.1](https://img.shields.io/badge/Version-1.89.0--bb.1-informational?style=flat-square) ![AppVersion: 1.89.0](https://img.shields.io/badge/AppVersion-1.89.0-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
 
 ## Upstream References
-
-* <https://github.com/kiali/kiali-operator>
 
 * <https://github.com/kiali/kiali>
 * <https://github.com/kiali/kiali-operator>
@@ -48,6 +46,7 @@ helm install kiali chart/
 | nameOverride | string | `"kiali-operator"` |  |
 | fullnameOverride | string | `""` |  |
 | domain | string | `"bigbang.dev"` |  |
+| sso.enabled | bool | `false` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.customAuthorizationPolicies | list | `[]` |  |
