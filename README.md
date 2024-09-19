@@ -1,11 +1,12 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 1.89.0-bb.1](https://img.shields.io/badge/Version-1.89.0--bb.1-informational?style=flat-square) ![AppVersion: 1.89.0](https://img.shields.io/badge/AppVersion-1.89.0-informational?style=flat-square)
+![Version: 1.89.3-bb.0](https://img.shields.io/badge/Version-1.89.3--bb.0-informational?style=flat-square) ![AppVersion: 1.89.3](https://img.shields.io/badge/AppVersion-1.89.3-informational?style=flat-square)
 
-Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
+Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
 ## Upstream References
+* <https://github.com/kiali/kiali-operator>
 
 * <https://github.com/kiali/kiali>
 * <https://github.com/kiali/kiali-operator>
@@ -16,7 +17,6 @@ Kiali is an open source project for service mesh observability, refer to <https:
 * [Find upstream chart's release notes and CHANGELOG here](https://kiali.io/news/release-notes/)
 
 ## Learn More
-
 * [Application Overview](docs/overview.md)
 * [Other Documentation](docs/)
 
@@ -28,13 +28,12 @@ Kiali is an open source project for service mesh observability, refer to <https:
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
 * Clone down the repository
 * cd into directory
-
 ```bash
 helm install kiali chart/
 ```
@@ -57,7 +56,7 @@ helm install kiali chart/
 | istio.mtls.mode | string | `"STRICT"` |  |
 | port | int | `20001` |  |
 | image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| image.tag | string | `"v1.89.1"` |  |
+| image.tag | string | `"v1.89.3"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -106,7 +105,7 @@ helm install kiali chart/
 | cr.spec.istio_component_namespaces.tracing | string | `"jaeger"` |  |
 | cr.spec.istio_namespace | string | `"istio-system"` |  |
 | cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| cr.spec.deployment.image_version | string | `"v1.89.0"` |  |
+| cr.spec.deployment.image_version | string | `"v1.89.3"` |  |
 | cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | cr.spec.deployment.ingress_enabled | bool | `false` |  |
 | cr.spec.deployment.accessible_namespaces[0] | string | `"**"` |  |
@@ -166,3 +165,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
