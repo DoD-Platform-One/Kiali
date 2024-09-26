@@ -1109,3 +1109,14 @@ bbtests:
 # cross-linking between Kiali instances in a multi-cluster setup.
 #    ---
 #    web_schema: ""
+
+waitJob:
+  enabled: true
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.6
+  permissions:
+    apiGroups:
+     - kiali.io
+     - kiali.io/v1alpha1
+    resources:
+     - kiali
