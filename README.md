@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 1.89.3-bb.0](https://img.shields.io/badge/Version-1.89.3--bb.0-informational?style=flat-square) ![AppVersion: 1.89.3](https://img.shields.io/badge/AppVersion-1.89.3-informational?style=flat-square)
+![Version: 1.89.3-bb.1](https://img.shields.io/badge/Version-1.89.3--bb.1-informational?style=flat-square) ![AppVersion: 1.89.3](https://img.shields.io/badge/AppVersion-1.89.3-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
