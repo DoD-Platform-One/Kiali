@@ -39,7 +39,7 @@ istio:
 port: 20001
 image:
   repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-  tag: v1.89.3
+  tag: v1.89.7
   digest: "" # use "sha256" if tag is a sha256 hash (do NOT prefix this value with a "@")
   pullPolicy: IfNotPresent
   pullSecrets:
@@ -184,7 +184,7 @@ cr:
     # custom_dashboards: []
     deployment:
       image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-      image_version: v1.89.3
+      image_version: v1.89.7
       image_pull_secrets:
         - private-registry
       ingress_enabled: false
@@ -1113,7 +1113,7 @@ bbtests:
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.29.6
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.5
   permissions:
     apiGroups:
      - kiali.io
