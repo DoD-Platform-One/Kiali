@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 1.89.3-bb.1](https://img.shields.io/badge/Version-1.89.3--bb.1-informational?style=flat-square) ![AppVersion: 1.89.3](https://img.shields.io/badge/AppVersion-1.89.3-informational?style=flat-square)
+![Version: 1.89.7-bb.0](https://img.shields.io/badge/Version-1.89.7--bb.0-informational?style=flat-square) ![AppVersion: 1.89.7](https://img.shields.io/badge/AppVersion-1.89.7-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -105,7 +105,7 @@ helm install kiali chart/
 | cr.spec.istio_component_namespaces.tracing | string | `"jaeger"` |  |
 | cr.spec.istio_namespace | string | `"istio-system"` |  |
 | cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| cr.spec.deployment.image_version | string | `"v1.89.3"` |  |
+| cr.spec.deployment.image_version | string | `"v1.89.7"` |  |
 | cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | cr.spec.deployment.ingress_enabled | bool | `false` |  |
 | cr.spec.deployment.accessible_namespaces[0] | string | `"**"` |  |
@@ -157,6 +157,11 @@ helm install kiali chart/
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://kiali:{{ default 20001 .Values.port }}"` |  |
+| waitJob.enabled | bool | `true` |  |
+| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.5"` |  |
+| waitJob.permissions.apiGroups[0] | string | `"kiali.io"` |  |
+| waitJob.permissions.apiGroups[1] | string | `"kiali.io/v1alpha1"` |  |
+| waitJob.permissions.resources[0] | string | `"kiali"` |  |
 
 ## Contributing
 
