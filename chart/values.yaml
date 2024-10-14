@@ -176,6 +176,9 @@ cr:
   annotations: {}
 
   spec:
+    istio_labels:
+      app_label_name: "app.kubernetes.io/name"
+      version_label_name: "app.kubernetes.io/version"
     istio_component_namespaces:
       grafana: monitoring
       prometheus: monitoring
