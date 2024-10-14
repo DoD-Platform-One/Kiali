@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 1.89.7-bb.0](https://img.shields.io/badge/Version-1.89.7--bb.0-informational?style=flat-square) ![AppVersion: 1.89.7](https://img.shields.io/badge/AppVersion-1.89.7-informational?style=flat-square)
+![Version: 1.89.7-bb.1](https://img.shields.io/badge/Version-1.89.7--bb.1-informational?style=flat-square) ![AppVersion: 1.89.7](https://img.shields.io/badge/AppVersion-1.89.7-informational?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -56,7 +56,7 @@ helm install kiali chart/
 | istio.mtls.mode | string | `"STRICT"` |  |
 | port | int | `20001` |  |
 | image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| image.tag | string | `"v1.89.3"` |  |
+| image.tag | string | `"v1.89.7"` |  |
 | image.digest | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
@@ -100,6 +100,8 @@ helm install kiali chart/
 | cr.name | string | `"kiali"` |  |
 | cr.namespace | string | `""` |  |
 | cr.annotations | object | `{}` |  |
+| cr.spec.istio_labels.app_label_name | string | `"app.kubernetes.io/name"` |  |
+| cr.spec.istio_labels.version_label_name | string | `"app.kubernetes.io/version"` |  |
 | cr.spec.istio_component_namespaces.grafana | string | `"monitoring"` |  |
 | cr.spec.istio_component_namespaces.prometheus | string | `"monitoring"` |  |
 | cr.spec.istio_component_namespaces.tracing | string | `"jaeger"` |  |
