@@ -39,7 +39,7 @@ istio:
 port: 20001
 image:
   repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-  tag: v1.89.7
+  tag: v2.1.0
   digest: "" # use "sha256" if tag is a sha256 hash (do NOT prefix this value with a "@")
   pullPolicy: IfNotPresent
   pullSecrets:
@@ -89,19 +89,10 @@ debug:
 watchNamespace: ""
 
 # Set to true if you want the operator to be able to create cluster roles. This is necessary
-# if you want to support Kiali CRs with spec.deployment.accessible_namespaces of '**'.
+# if you want to support Kiali CRs with spec.deployment.cluster_wide_access=true.
 # Setting this to "true" requires allowAllAccessibleNamespaces to be "true" also.
-# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.accessible_namespaces is ['**'].
+# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.cluster_wide_access=true.
 clusterRoleCreator: true
-
-# Set to a list of secrets in the cluster that the operator will be allowed to read. This is necessary if you want to
-# support Kiali CRs with spec.kiali_feature_flags.certificates_information_indicators.enabled=true.
-# The secrets in this list will be the only ones allowed to be specified in any Kiali CR (in the setting
-# spec.kiali_feature_flags.certificates_information_indicators.secrets).
-# If you set this to an empty list, the operator will not be given permission to read any additional secrets
-# found in the cluster, and thus will only support a value of "false" in the Kiali CR setting
-# spec.kiali_feature_flags.certificates_information_indicators.enabled.
-secretReader: ["cacerts", "istio-ca-secret"]
 
 # Set to true if you want to allow the operator to only be able to install Kiali in view-only-mode.
 # The purpose for this setting is to allow you to restrict the permissions given to the operator itself.
@@ -133,26 +124,11 @@ allowAdHocOSSMConsoleImage: false
 allowSecurityContextOverride: true
 
 # allowAllAccessibleNamespaces tells the operator to allow a user to be able to configure Kiali
-# to access all namespaces in the cluster via spec.deployment.accessible_namespaces=['**'].
-# If this is false, the user must specify an explicit list of namespaces in the Kiali CR.
+# to access all namespaces in the cluster via spec.deployment.cluster_wide_access=true.
+# If this is false, the user must specify an explicit set of namespaces in the Kiali CR via spec.deployment.discovery_selectors.
 # Setting this to "true" requires clusterRoleCreator to be "true" also.
-# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.accessible_namespaces is ['**'].
+# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.cluster_wide_access=true.
 allowAllAccessibleNamespaces: true
-
-# accessibleNamespacesLabel restricts the namespaces that a user can add to the Kiali CR spec.deployment.accessible_namespaces.
-# This value is either an empty string (which disables this feature) or a label name with an optional label value
-# (e.g. "mylabel" or "mylabel=myvalue"). Only namespaces that have that label will be permitted in
-# spec.deployment.accessible_namespaces. Any namespace not labeled properly but specified in accessible_namespaces will cause
-# the operator to abort the Kiali installation.
-# If just a label name (but no label value) is specified, the label value the operator will look for is the value of
-# the Kiali CR's spec.istio_namespace. In other words, the operator will look for the named label whose value must be the name
-# of the Istio control plane namespace (which is typically, but not necessarily, "istio-system").
-accessibleNamespacesLabel: ""
-
-# oidcCaCert gives Kiali a CA certificate to use when communicating with the OIDC Identity Provider.
-# This is not a feature provided by Kiali out of the box, so it must be provisioned manually outside of the CR spec.
-# See https://kiali.io/docs/configuration/authentication/openid/#using-an-openid-provider-with-a-self-signed-certificate
-oidcCaCert: ""
 
 # watchesFile: If specified, this determines what watches file will be used to configure the operator. There are four different
 # files that can be selected: (a) `watches-os.yaml`, (b) `watches-os-ns.yaml`, (c) `watches-k8s.yaml` or (d) `watches-k8s-ns.yaml`.
@@ -162,8 +138,7 @@ oidcCaCert: ""
 # the default behavior and is not necessary if your Kiali CRs will have `spec.deployment.cluster_wide_access` set to `true`.
 watchesFile: ""
 
-# For what a Kiali CR spec can look like, see:
-# https://github.com/kiali/kiali-operator/blob/master/deploy/kiali/kiali_cr.yaml
+# For what a Kiali CR spec can look like, see: https://kiali.io/docs/configuration/kialis.kiali.io/
 cr:
   create: true
   name: kiali
@@ -176,6 +151,10 @@ cr:
   annotations: {}
 
   spec:
+    kiali_feature_flags:
+      ui_defaults:
+        graph:
+          impl: "cy"
     istio_labels:
       app_label_name: "app.kubernetes.io/name"
       version_label_name: "app.kubernetes.io/version"
@@ -187,7 +166,7 @@ cr:
     # custom_dashboards: []
     deployment:
       image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-      image_version: v1.89.7
+      image_version: v2.1.0
       image_pull_secrets:
         - private-registry
       ingress_enabled: false
@@ -947,7 +926,7 @@ bbtests:
 #
 # Default settings for the UI. These defaults apply to all users.
 #    ---
-#    ui_defaults:
+  #  ui_defaults:
 #
 # Duration of metrics to fetch on each refresh. Omit for default.
 # Valid values: 1m, 5m, 10m, 30m, 1h, 3h, 6h, 12h, 1d, 7d, 30d
@@ -1116,7 +1095,7 @@ bbtests:
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.5
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.7
   permissions:
     apiGroups:
      - kiali.io

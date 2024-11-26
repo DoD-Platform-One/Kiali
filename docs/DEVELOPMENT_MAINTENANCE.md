@@ -197,3 +197,5 @@ This policy revokes access to the K8s API for Pods utilizing said ServiceAccount
 - Ensure renovate does not remove `oidcCaCert` key and associated comment. This corresponds to `chart/templates/bigbang/oidc-ca-cm.yaml` added in [#52](https://repo1.dso.mil/big-bang/product/packages/kiali/-/issues/52)
 
 - Add `sso` key that defaults to false. Needed for downstream changes that rely on this in `chart/templates/bigbang/ssoServiceEntry.yaml` and `chart/templates/bigbang/networkpolicies/egress-sso.yml`.
+
+- Set Cytoscape implementation as default since it is currently being used by cypress testing. Cytoscape is planned to be fully deprecated, and  PatternFly will be the default implementaiton. lines 154-157
