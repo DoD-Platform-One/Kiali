@@ -22,6 +22,7 @@ dependencies:
     version: "0.5.12"
     repository: "oci://registry1.dso.mil/bigbang"
 annotations:
+  bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |
     - Kiali: 2.1.0
   helm.sh/images: |

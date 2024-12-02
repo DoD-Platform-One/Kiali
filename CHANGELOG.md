@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Updated Kiali and Kiali-operator to v2.1.0
 - Updated Gluon to v0.5.12
 - Updated kubectl to v1.30.7
+- Added the maintenance track annotation and badge
 
 ## [1.89.7-bb.1] - 2024-10-10
 
