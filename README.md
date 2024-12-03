@@ -1,16 +1,16 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.1.0-bb.0](https://img.shields.io/badge/Version-2.1.0--bb.0-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 2.1.0-bb.0](https://img.shields.io/badge/Version-2.1.0--bb.0-informational?style=flat-square) ![AppVersion: 2.1.0](https://img.shields.io/badge/AppVersion-2.1.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
 ## Upstream References
 - <https://github.com/kiali/kiali-operator>
 
-- <https://github.com/kiali/kiali>
-- <https://github.com/kiali/kiali-operator>
-- <https://github.com/kiali/helm-charts>
+* <https://github.com/kiali/kiali>
+* <https://github.com/kiali/kiali-operator>
+* <https://github.com/kiali/helm-charts>
 
 ## Upstream Release Notes
 
