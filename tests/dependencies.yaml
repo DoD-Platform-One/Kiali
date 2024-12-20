@@ -8,12 +8,12 @@ istio:
   git:
     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/istio-controlplane.git
 
-monitoring:
-  git:
-    repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/monitoring.git
-  package-name: monitoring-monitoring
-  namespace: monitoring
-  namespace-label: monitoring
+# monitoring:
+#   git:
+#     repo: https://repo1.dso.mil/platform-one/big-bang/apps/core/monitoring.git
+#   package-name: monitoring-monitoring
+#   namespace: monitoring
+#   namespace-label: monitoring
 
 jaeger:
   git:
