@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.2.0-bb.0] - 2024-12-18
+
+### Changed
+
+- Updated Kiali and Kiali-operator to v2.2.0
+- Updated kubectl to v1.30.8
+
 ## [2.1.0-bb.0] - 2024-11-26
 
 ### Changed
