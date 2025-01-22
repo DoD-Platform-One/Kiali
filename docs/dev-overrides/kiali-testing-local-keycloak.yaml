@@ -42,9 +42,9 @@ kiali:
           strategy: "openid"
   # Add git branch or tag information to test against a specific branch or tag instead of using `main`
   # Must set the unused label to null
-  # git:
-  #   tag: null
-  #   branch: "renovate/ironbank"
+  git:
+    tag: null
+    branch: "renovate/ironbank"
 
 addons:
   keycloak:
