@@ -12,7 +12,8 @@ istio:
     enabled: false
     customAuthorizationPolicies: []
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
+    customServiceEntries:
+      []
       # - name: "allow-google"
       #   enabled: true
       #   spec:
@@ -39,7 +40,7 @@ istio:
 port: 20001
 image:
   repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-  tag: v2.3.0
+  tag: v2.4.1
   digest: "" # use "sha256" if tag is a sha256 hash (do NOT prefix this value with a "@")
   pullPolicy: IfNotPresent
   pullSecrets:
@@ -56,7 +57,6 @@ resources:
     cpu: 200m
     memory: 8000Mi
   limits:
-    cpu: 200m
     memory: 8000Mi
 affinity: {}
 replicaCount: 1
@@ -166,7 +166,7 @@ cr:
     # custom_dashboards: []
     deployment:
       image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-      image_version: v2.3.0
+      image_version: v2.4.0
       image_pull_secrets:
         - private-registry
       ingress_enabled: false
@@ -179,7 +179,6 @@ cr:
           cpu: 200m
           memory: 368Mi
         limits:
-          cpu: 200m
           memory: 368Mi
       security_context:
         capabilities:
@@ -255,7 +254,7 @@ bbtests:
   cypress:
     artifacts: true
     envs:
-      cypress_url: 'http://kiali:{{ default 20001 .Values.port }}'
+      cypress_url: "http://kiali:{{ default 20001 .Values.port }}"
 
 # Taken from https://github.com/kiali/kiali-operator/blob/v1.33/deploy/kiali/kiali_cr.yaml
 ###################################################################
@@ -926,7 +925,7 @@ bbtests:
 #
 # Default settings for the UI. These defaults apply to all users.
 #    ---
-  #  ui_defaults:
+#  ui_defaults:
 #
 # Duration of metrics to fetch on each refresh. Omit for default.
 # Valid values: 1m, 5m, 10m, 30m, 1h, 3h, 6h, 12h, 1d, 7d, 30d
@@ -1095,10 +1094,10 @@ bbtests:
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.8
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.9
   permissions:
     apiGroups:
-     - kiali.io
-     - kiali.io/v1alpha1
+      - kiali.io
+      - kiali.io/v1alpha1
     resources:
-     - kiali
+      - kiali
