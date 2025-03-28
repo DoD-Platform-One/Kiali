@@ -18,7 +18,6 @@ kyvernoReporter:
 addons:
   minioOperator:
     enabled: false
-
 ########################
 # Required for package #
 ########################
@@ -43,3 +42,4 @@ kiali:
       cypress:
         envs:
           cypress_check_data: 'false'
+
