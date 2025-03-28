@@ -1,18 +1,45 @@
-bbtests:
-  enabled: true
-  cypress:
-    resources:
-      requests:
-        cpu: "2"
-        memory: "1500M"
-      limits:
-        cpu: "2"
-        memory: "1500M"
+#########################
+# Disable Core Packages #
+#########################
+monitoring:
+  enabled: false
+grafana:
+  enabled: false
+neuvector:
+  enabled: false
+loki:
+  enabled: false
+promtail:
+  enabled: false
+tempo:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+addons:
+  minioOperator:
+    enabled: false
 
-networkPolicies:
+########################
+# Required for package #
+########################
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
+kyverno:
+  values:
+    bbtests:
+      enabled: false
+jaeger:
   enabled: true
-  controlPlaneCidr: 172.16.0.0/12
-
-resources:
-  limits:
-    cpu: "1"
+  values:
+    bbtests:
+      enabled: false
+kiali:
+  enabled: true
+  values:
+    ### Set this to false so we do not run Kiali specific monitoring tests
+    bbtests:
+      cypress:
+        envs:
+          cypress_check_data: 'false'
