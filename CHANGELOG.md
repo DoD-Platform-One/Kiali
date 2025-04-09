@@ -3,31 +3,39 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [2.7.1-bb.0] - 2026-03-31
+## [2.8.0-bb.0] - 2025-04-09
+
+### Updated
+
+- Updated Kiali and Kiali-operator to v2.8.0
+- Updated kubectl to v1.32.3
+- Updated gluon to 0.5.15
+
+## [2.7.1-bb.0] - 2025-03-31
 
 ### Updated
 
 - Updated Kiali and Kiali-operator to v2.7.1
 
-## [2.6.0-bb.1] - 2026-03-10
+## [2.6.0-bb.1] - 2025-03-10
 
 ### Updated
 
 - Update kubectl to 1.30.11
 
-## [2.6.0-bb.0] - 2026-03-10
+## [2.6.0-bb.0] - 2025-03-10
 
 ### Updated
 
 - Updated Kiali and Kiali-operator to v2.6.0
 
-## [2.5.0-bb.0] - 2026-02-13
+## [2.5.0-bb.0] - 2025-02-13
 
 ### Updated
 
 - Updated Kiali and Kiali-operator to v2.5.0
 
-## [2.4.0-bb.2] - 2026-02-06
+## [2.4.0-bb.2] - 2025-02-06
 
 ### Changed
 

@@ -45,7 +45,7 @@ describe('Kiali', function () {
   })
 
   it('loads the traffic graph page', function () {
-    cy.get('#traffic_graph_pf', { timeout: 60000 }).click();
+    cy.get('#traffic_graph', { timeout: 60000 }).click();
   })
 
   it('loads the applications page', function () {
@@ -70,7 +70,7 @@ describe('Kiali', function () {
     })
 
     it('loads the traffic graph page', function () {
-      cy.get('#traffic_graph_pf', { timeout: 60000 }).click();
+      cy.get('#traffic_graph', { timeout: 60000 }).click();
     })
 
     it('closes the side menu', function () {
