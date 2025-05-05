@@ -40,13 +40,14 @@ istio:
 port: 20001
 image:
   repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-  tag: v2.8.0
+  tag: v2.9.0
   digest: "" # use "sha256" if tag is a sha256 hash (do NOT prefix this value with a "@")
   pullPolicy: IfNotPresent
   pullSecrets:
     - private-registry
 
 # Deployment options for the operator pod.
+extraLabels: {}
 nodeSelector: {}
 podAnnotations: {}
 podLabels: {}
@@ -161,8 +162,9 @@ cr:
     istio_namespace: istio-system
     # custom_dashboards: []
     deployment:
+      cluster_wide_access: true
       image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-      image_version: v2.8.0
+      image_version: v2.9.0
       image_pull_secrets:
         - private-registry
       ingress_enabled: false
@@ -1090,7 +1092,7 @@ bbtests:
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4
   permissions:
     apiGroups:
       - kiali.io
