@@ -1,7 +1,7 @@
 apiVersion: v2
 name: kiali
 description: Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
-version: 2.9.0-bb.0
+version: 2.9.0-bb.1
 appVersion: 2.9.0
 home: https://github.com/kiali/kiali-operator
 maintainers:
@@ -21,6 +21,10 @@ dependencies:
   - name: gluon
     version: "0.5.17"
     repository: "oci://registry1.dso.mil/bigbang"
+  - name: kiali-operator
+    version: "v2.9.0"
+    repository: "https://kiali.org/helm-charts/"
+    alias: "upstream"
 annotations:
   bigbang.dev/maintenanceTrack: bb_integrated
   bigbang.dev/applicationVersions: |

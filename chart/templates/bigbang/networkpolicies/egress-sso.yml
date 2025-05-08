@@ -1,4 +1,4 @@
-{{- if and .Values.networkPolicies.enabled .Values.sso.enabled (eq "openid" .Values.cr.spec.auth.strategy) }}
+{{- if and .Values.networkPolicies.enabled .Values.sso.enabled (eq "openid" .Values.upstream.cr.spec.auth.strategy) }}
 # needs tuning
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

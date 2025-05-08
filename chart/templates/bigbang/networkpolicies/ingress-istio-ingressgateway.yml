@@ -21,5 +21,5 @@ spec:
           matchLabels:
             {{- toYaml .Values.networkPolicies.ingressLabels | nindent 12}}
       ports:
-      - port: {{ .Values.port }}
+      - port: {{ .Values.upstream.cr.spec.server.port }}
 {{- end }}
