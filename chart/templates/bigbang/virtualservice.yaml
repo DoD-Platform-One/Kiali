@@ -24,6 +24,6 @@ spec:
   - route:
     - destination:
         port:
-          number: {{ .Values.port | default "20001" }}
+          number: {{ .Values.upstream.cr.spec.server.port }}
         host: kiali.{{ .Release.Namespace }}.svc.cluster.local
 {{- end }}

@@ -1,4 +1,4 @@
-{{- if and .Values.networkPolicies.enabled .Values.cr.spec.external_services.tracing.enabled }}
+{{- if and .Values.networkPolicies.enabled .Values.upstream.cr.spec.external_services.tracing.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
