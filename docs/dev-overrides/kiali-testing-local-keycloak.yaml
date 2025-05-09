@@ -10,6 +10,27 @@
 # -f docs/dev-overrides/minimal.yaml \
 # -f docs/dev-overrides/kiali-testing.yaml
 
+networkPolicies:
+  enabled: true
+
+kyverno:
+  enabled: true
+
+kyvernoPolicies:
+  enabled: true
+
+kyvernoReporter:
+  enabled: true
+
+# istioCRDs:
+#   enabled: false
+
+# istiod:
+#   enabled: false
+
+# istioGateway:
+#   enabled: false
+
 istio:
   enabled: true
 
@@ -36,12 +57,11 @@ kiali:
   sso:
     enabled: true
   values:
-    cr:
-      spec:
-        auth:
-          strategy: "openid"
-  # Add git branch or tag information to test against a specific branch or tag instead of using `main`
-  # Must set the unused label to null
+    upstream:
+      cr:
+        spec:
+          auth:
+            strategy: "openid"
   git:
     tag: null
     branch: "renovate/ironbank"
