@@ -1,22 +1,27 @@
-# Maintaining Kiali
+# Kiali Development Maintenance Guide
 
 ## Code Changes for Updates/Renovates
 
 **NOTE:** Updated kiali-operator images can be requested by creating an issue in the [Iron Bank kiali-operator project](https://repo1.dso.mil/dsop/opensource/kiali/kiali-operator/-/issues)
 
-1. Checkout the `renovate/ironbank` branch.
+`Kiali` is a passthrough chart. That means it does not fork an upstream chart but instead embeds one as a dependency. Because of this, the upgrade
+process is incredibly simple.
+
+1. Checkout the `renovate/ironbank` branch. You can either work off of this branch or branch off of it.
 1. Check the [upstream repo](https://github.com/kiali/helm-charts/tags) for chart updates.
 1. Note that Iron Bank does not automatically update kiali-operator with Renovate. Verify that the version of the kiali image to which you'll be updating and the kiali-operator version match (to do this look at how the MR will change the `annotation.helm.sh/images` section in [chart/Chart.yaml](../chart/Chart.yaml)).
-    - If the kiali and kiali-operator image versions match, proceed to the next step that handles upgrading the chart with kpt.
+    - If the kiali and kiali-operator image versions match, proceed to the next step that handles the helm dependency update.
     - If they do not match, open an issue with Iron Bank [here](https://repo1.dso.mil/dsop/opensource/kiali/kiali-operator/-/issues) to have them update kiali-operator manually. It's also a good idea to ping them in the [BB <-> IB channel in IL4 Mattermost](https://chat.il4.dso.mil/platform-one/channels/bbib-coordination-and-collaboration) to let them know you've opened this issue. See the [Testing kiali-operator image updates](#testing-kiali-operator-image-updates) subsection below for important details on the process of updating the kiali-operator image and testing Kiali with the new image.
-1. From the root of the repo run, `kpt pkg update chart@<v1.x.x> --strategy alpha-git-patch`. Use the version tag you got in the previous steps. You may be prompted to resolve some conflicts - choose what makes sense (if there are BB additions/changes keep them, if there are upstream additions/changes keep them).
-1. Modify the `version` in [chart/Chart.yaml](../chart/Chart.yaml) - append `-bb.0` to the chart version from upstream.
 1. Update dependencies to latest versions.
 
     ```sh
     helm dependency update ./chart
     ```
-
+1. Update version references for the chart in `Chart.yaml`. `version` should be
+   `<version>-bb.0` (ex: `1.25.1-bb.0`) and `appVersion` should be `<version>`
+   (ex: `1.25.1`). Also validate that the Big Bang
+   `bigbang.dev/applicationVersions` and `helm.sh/images` annotations are update
+   to reflect the chart's new application and image versions.
 1. Update [CHANGELOG.md](../CHANGELOG.md) adding an entry for the new version and noting all changes (at minimum this should include the line `Updated Kiali to x.x.x`).
 1. Generate the [README.md](../README.md) using the [gluon library script](https://repo1.dso.mil/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md) guidelines noting any additional chart changes you make during development testing.
 1. Push your changes, validate that the CI pipeline passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
@@ -82,7 +87,7 @@ e.g.
 export BIGBANG_REPO_DIR=~/repos/bigbang
 ```
 
-1. Run the [k3d_dev.sh](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/assets/scripts/developer/k3d-dev.sh) script to deploy a dev cluster (`-a` flag required if deploying a local Keycloak):
+1. Run the [k3d_dev.sh](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/assets/scripts/developer/k3d-dev.sh) script to deploy a dev cluster:
 
     For `login.dso.mil` Keycloak:
 
@@ -90,10 +95,10 @@ export BIGBANG_REPO_DIR=~/repos/bigbang
     "${BIGBANG_REPO_DIR}"/docs/assets/scripts/developer/k3d-dev.sh
     ```
 
-    For local `keycloak.dev.bigbang.mil` Keycloak (`-a` deploys instance with a second public IP and metallb):
+    For local `keycloak.dev.bigbang.mil` Keycloak:
 
     ```sh
-    "${BIGBANG_REPO_DIR}"/docs/assets/scripts/developer/k3d-dev.sh -a
+    "${BIGBANG_REPO_DIR}"/docs/assets/scripts/developer/k3d-dev.sh
     ```
 
 1. Export your kubeconfig:
@@ -198,4 +203,3 @@ This policy revokes access to the K8s API for Pods utilizing said ServiceAccount
 
 - Add `sso` key that defaults to false. Needed for downstream changes that rely on this in `chart/templates/bigbang/ssoServiceEntry.yaml` and `chart/templates/bigbang/networkpolicies/egress-sso.yml`.
 
-- Set Cytoscape implementation as default since it is currently being used by cypress testing. Cytoscape is planned to be fully deprecated, and  PatternFly will be the default implementaiton. lines 154-157
