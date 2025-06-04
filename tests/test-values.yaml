@@ -29,7 +29,7 @@ kyverno:
   values:
     bbtests:
       enabled: false
-jaeger:
+tempo:
   enabled: true
   values:
     bbtests:
