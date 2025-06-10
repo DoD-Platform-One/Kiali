@@ -27,26 +27,20 @@ kyvernoPolicies:
 kyvernoReporter:
   enabled: true
 
-# istioCRDs:
-#   enabled: false
+istioCRDs:
+  enabled: true
 
-# istiod:
-#   enabled: false
+istiod:
+  enabled: true
 
-# istioGateway:
-#   enabled: false
+istioGateway:
+  enabled: true
 
 istio:
-  enabled: true
-  ingressGateways:
-    passthrough-ingressgateway:
-      enabled: false
-  gateways:
-    passthrough:
-      enabled: false
+  enabled: false
 
 istioOperator:
-  enabled: true
+  enabled: false
 
 monitoring:
   enabled: true
@@ -54,7 +48,7 @@ monitoring:
 grafana:
   enabled: true
 
-jaeger:
+tempo:
   enabled: true
 
 kiali:
