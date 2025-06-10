@@ -1,6 +1,8 @@
 #########################
 # Disable Core Packages #
 #########################
+bbctl:
+  enabled: false
 monitoring:
   enabled: false
 grafana:
