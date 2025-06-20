@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Big Bang Kiali Helm Values Schema",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Base domain for Kiali ingress."
+    },
+    "sso": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "istio": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "hardened": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "customAuthorizationPolicies": {
+              "type": "array",
+              "items": { "type": "object" }
+            },
+            "outboundTrafficPolicyMode": {
+              "type": "string",
+              "enum": ["REGISTRY_ONLY", "ALLOW_ANY"]
+            },
+            "customServiceEntries": {
+              "type": "array",
+              "items": { "type": "object" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "kiali": {
+          "type": "object",
+          "properties": {
+            "gateways": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "hosts": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "mtls": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["STRICT", "PERMISSIVE"]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "networkPolicies": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "ingressLabels": {
+          "type": "object",
+          "properties": {
+            "app": { "type": "string" },
+            "istio": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "controlPlaneCidr": { "type": "string" },
+        "additionalPolicies": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "istioNamespaceSelector": {
+          "type": "object",
+          "properties": {
+            "egress": { "type": "string" },
+            "ingress": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "bbtests": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "cypress": {
+          "type": "object",
+          "properties": {
+            "artifacts": { "type": "boolean" },
+            "envs": {
+              "type": "object",
+              "properties": {
+                "cypress_url": { "type": "string" }
+              },
+              "additionalProperties": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "upstream": {
+      "type": "object",
+      "description": "Upstream configuration for Kiali",
+      "additionalProperties": true
+    },
+    "waitJob": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "scripts": {
+          "type": "object",
+          "properties": {
+            "image": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "permissions": {
+          "type": "object",
+          "properties": {
+            "apiGroups": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "resources": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "gluon": {
+      "description": "Values for the gluon subchart.",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "oidcCaCert": {
+      "type": "string",
+      "description": "CA certificate for OIDC provider."
+    },
+    "openshift": {
+      "type": "boolean",
+      "description": "Enable OpenShift-specific resources."
+    }
+  },
+  "additionalProperties": false
+} 
