@@ -1,0 +1,3 @@
+{{- if .Values.networkPolicies.enabled }}
+{{- include "bb-common.netpols.all" . }}
+{{- end }}
