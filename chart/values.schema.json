@@ -14,6 +14,20 @@
       },
       "additionalProperties": false
     },
+    "monitoring": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "tracing": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
     "istio": {
       "type": "object",
       "properties": {
@@ -77,6 +91,47 @@
           "additionalProperties": false
         },
         "controlPlaneCidr": { "type": "string" },
+        "bundled": {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"}
+              },
+              "additionalProperties": false
+            },
+            "conditional": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"}
+              },
+              "additionalProperties": false
+            },
+            "kubeApiAccess": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"},
+                "controlPlaneCidrs": {"type": "array"}
+              },
+              "additionalProperties": false
+            },
+            "dynamic": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"},
+                "ingressGatewayPorts": {"type": "array"},
+                "metricsPorts": {"type": "array"},
+                "databaseCidrs": {"type": "array"},
+                "ssoCidrs": {"type": "array"}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "package": {
+          "type": "object"
+        },
         "additionalPolicies": {
           "type": "array",
           "items": { "type": "object" }
@@ -145,6 +200,11 @@
         }
       },
       "additionalProperties": false
+    },
+    "bb-common": {
+      "description": "Values used by the bb-common subchart.",
+      "type": "object",
+      "additionalProperties": true
     },
     "gluon": {
       "description": "Values for the gluon subchart.",
