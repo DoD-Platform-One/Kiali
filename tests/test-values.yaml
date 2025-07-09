@@ -3,10 +3,12 @@
 #########################
 bbctl:
   enabled: false
+networkPolicies:
+  enabled: true
 monitoring:
-  enabled: false
+  enabled: true
 grafana:
-  enabled: false
+  enabled: true
 neuvector:
   enabled: false
 loki:
@@ -19,7 +21,7 @@ kyvernoReporter:
   enabled: false
 addons:
   minioOperator:
-    enabled: false
+    enabled: true
 ########################
 # Required for package #
 ########################
@@ -32,16 +34,9 @@ kyverno:
     bbtests:
       enabled: false
 tempo:
-  enabled: true
+  enabled: false
   values:
     bbtests:
       enabled: false
 kiali:
   enabled: true
-  values:
-    ### Set this to false so we do not run Kiali specific monitoring tests
-    bbtests:
-      cypress:
-        envs:
-          cypress_check_data: 'false'
-
