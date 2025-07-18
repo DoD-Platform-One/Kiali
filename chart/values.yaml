@@ -48,9 +48,11 @@ networkPolicies:
       - 192.168.0.0/16
     dynamic:
       enabled: true
-      ingressGatewayPorts:
-      - port: 20001
-        protocol: TCP
+      ingress:
+        kiali:
+          ports:
+          - port: 20001
+            protocol: TCP
       ssoCidrs:
       - 0.0.0.0/0
   package:
