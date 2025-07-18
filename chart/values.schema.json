@@ -121,6 +121,7 @@
               "properties": {
                 "enabled": {"type": "boolean"},
                 "ingressGatewayPorts": {"type": "array"},
+                "ingress": { "type": "object" },
                 "metricsPorts": {"type": "array"},
                 "databaseCidrs": {"type": "array"},
                 "ssoCidrs": {"type": "array"}

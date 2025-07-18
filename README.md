@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.10.0-bb.2](https://img.shields.io/badge/Version-2.10.0--bb.2-informational?style=flat-square) ![AppVersion: 2.10.0](https://img.shields.io/badge/AppVersion-2.10.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.10.0-bb.3](https://img.shields.io/badge/Version-2.10.0--bb.3-informational?style=flat-square) ![AppVersion: 2.10.0](https://img.shields.io/badge/AppVersion-2.10.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -66,20 +66,23 @@ helm install kiali chart/
 | networkPolicies.bundled.kubeApiAccess.controlPlaneCidrs[1] | string | `"172.16.0.0/12"` |  |
 | networkPolicies.bundled.kubeApiAccess.controlPlaneCidrs[2] | string | `"192.168.0.0/16"` |  |
 | networkPolicies.bundled.dynamic.enabled | bool | `true` |  |
-| networkPolicies.bundled.dynamic.ingressGatewayPorts[0].port | int | `20001` |  |
-| networkPolicies.bundled.dynamic.ingressGatewayPorts[0].protocol | string | `"TCP"` |  |
+| networkPolicies.bundled.dynamic.ingress.kiali.ports[0].port | int | `20001` |  |
+| networkPolicies.bundled.dynamic.ingress.kiali.ports[0].protocol | string | `"TCP"` |  |
 | networkPolicies.bundled.dynamic.ssoCidrs[0] | string | `"0.0.0.0/0"` |  |
 | networkPolicies.package.allow-prometheus-mesh-egress.enabled | bool | `true` |  |
 | networkPolicies.package.allow-prometheus-mesh-egress.direction | string | `"Egress"` |  |
+| networkPolicies.package.allow-prometheus-mesh-egress.from | string | `"kiali.kiali"` |  |
 | networkPolicies.package.allow-prometheus-mesh-egress.to | string | `"prometheus.monitoring"` |  |
 | networkPolicies.package.allow-prometheus-mesh-egress.ports[0].port | int | `9090` |  |
 | networkPolicies.package.allow-grafana-mesh-egress.enabled | bool | `true` |  |
 | networkPolicies.package.allow-grafana-mesh-egress.direction | string | `"Egress"` |  |
+| networkPolicies.package.allow-grafana-mesh-egress.from | string | `"kiali.kiali"` |  |
 | networkPolicies.package.allow-grafana-mesh-egress.to | string | `"grafana.monitoring"` |  |
 | networkPolicies.package.allow-grafana-mesh-egress.ports[0].port | int | `3000` |  |
 | networkPolicies.package.allow-grafana-mesh-egress.ports[0].protocol | string | `"TCP"` |  |
 | networkPolicies.package.allow-tempo-mesh-egress.enabled | bool | `true` |  |
 | networkPolicies.package.allow-tempo-mesh-egress.direction | string | `"Egress"` |  |
+| networkPolicies.package.allow-tempo-mesh-egress.from | string | `"kiali.kiali"` |  |
 | networkPolicies.package.allow-tempo-mesh-egress.to | string | `"tempo.tempo"` |  |
 | networkPolicies.package.allow-tempo-mesh-egress.ports[0].port | int | `3100` |  |
 | networkPolicies.package.allow-tempo-mesh-egress.ports[0].protocol | string | `"TCP"` |  |
