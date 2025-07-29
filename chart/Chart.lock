@@ -4,9 +4,9 @@ dependencies:
   version: 0.3.1
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.6.3
+  version: 0.7.0
 - name: kiali-operator
   repository: https://kiali.org/helm-charts/
   version: 2.12.0
-digest: sha256:a034d10da655a2557d7f34df9b01886c42e3065a52f26ed09f4c04352dcb0c64
-generated: "2025-07-22T09:43:35.79397-04:00"
+digest: sha256:6a9b7e3bd9b6b41e08519505d434c1c39b76e3e33b753816ae46a631f841af39
+generated: "2025-07-28T10:16:45.941782-05:00"

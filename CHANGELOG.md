@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.12.0-bb.1] - 2025-07-24
+
+### Updated
+
+- Updated cpu and memory requests for Kiali resource
+- Updated wait script permissions and file structure to use gluon
+- Updated gluon from 0.6.3 to 0.7.0
+
 ## [2.12.0-bb.0] - 2025-07-22
 
 ### Updated

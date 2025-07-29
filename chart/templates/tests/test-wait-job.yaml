@@ -1,19 +1,19 @@
-{{- include "gluon.wait.wait-job-configmap.overrides" (list . "minio-wait.wait-configmap") }}
-{{- define "minio-wait.wait-configmap" }}
+{{- include "gluon.wait.wait-job-configmap.overrides" (list . "gluon-wait.wait-configmap") }}
+{{- define "gluon-wait.wait-configmap" }}
 {{- end }}
 ---
-{{ include "gluon.wait.wait-job.overrides" (list . "minio-wait.wait-job") }}
-{{- define "minio-wait.wait-job" }}
+{{ include "gluon.wait.wait-job.overrides" (list . "gluon-wait.wait-job") }}
+{{- define "gluon-wait.wait-job" }}
 {{- end }}
 ---
-{{ include "gluon.wait.wait-job-sa.overrides" (list . "minio-wait.wait-job-sa") }}
-{{- define "minio-wait.wait-job-sa" }}
+{{ include "gluon.wait.wait-job-sa.overrides" (list . "gluon-wait.wait-job-sa") }}
+{{- define "gluon-wait.wait-job-sa" }}
 {{- end }}
 ---
-{{ include "gluon.wait.wait-job-role.overrides" (list . "minio-wait.wait-job-role") }}
-{{- define "minio-wait.wait-job-role" }}
+{{ include "gluon.wait.wait-job-role.overrides" (list . "gluon-wait.wait-job-role") }}
+{{- define "gluon-wait.wait-job-role" }}
 {{- end }}
 ---
-{{ include "gluon.wait.wait-job-rolebinding.overrides" (list . "minio-wait.wait-job-rolebinding") }}
-{{- define "minio-wait.wait-job-rolebinding" }}
+{{ include "gluon.wait.wait-job-rolebinding.overrides" (list . "gluon-wait.wait-job-rolebinding") }}
+{{- define "gluon-wait.wait-job-rolebinding" }}
 {{- end }}
