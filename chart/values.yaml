@@ -94,10 +94,12 @@ waitJob:
     image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
   permissions:
     apiGroups:
+      - apps
       - kiali.io
       - kiali.io/v1alpha1
     resources:
-      - kiali
+      - deployments
+      - kialis
 
 upstream:
   nameOverride: "kiali-operator"
@@ -147,6 +149,12 @@ upstream:
         image_version: v2.12.0
         image_pull_secrets:
           - private-registry
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            memory: "1Gi"
         security_context:
           capabilities:
             drop:
