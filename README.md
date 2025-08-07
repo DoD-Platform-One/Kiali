@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.12.0-bb.1](https://img.shields.io/badge/Version-2.12.0--bb.1-informational?style=flat-square) ![AppVersion: 2.12.0](https://img.shields.io/badge/AppVersion-2.12.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.12.0-bb.2](https://img.shields.io/badge/Version-2.12.0--bb.2-informational?style=flat-square) ![AppVersion: 2.12.0](https://img.shields.io/badge/AppVersion-2.12.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -57,6 +57,14 @@ helm install kiali chart/
 | tracing.enabled | bool | `true` |  |
 | monitoring.enabled | bool | `true` |  |
 | networkPolicies.enabled | bool | `false` |  |
+| networkPolicies.prependReleaseName | bool | `true` |  |
+| networkPolicies.ingress.to.kiali.from.definition.gateway | bool | `true` |  |
+| networkPolicies.egress.from.*.to.definition.kubeAPI | bool | `true` |  |
+| networkPolicies.egress.from.kiali.to.k8s.monitoring/prometheus:9090 | bool | `true` |  |
+| networkPolicies.egress.from.kiali.to.k8s.monitoring/grafana:3000 | bool | `true` |  |
+| networkPolicies.egress.from.kiali.to.k8s.tempo/tempo:3100 | bool | `true` |  |
+| networkPolicies.egress.from.helm-test.podSelector.matchLabels.helm-test | string | `"enabled"` |  |
+| networkPolicies.egress.from.helm-test.to.cidr."0.0.0.0/0" | bool | `true` |  |
 | networkPolicies.ingressLabels.app | string | `"istio-ingressgateway"` |  |
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | networkPolicies.bundled.base.enabled | bool | `true` |  |
@@ -69,23 +77,6 @@ helm install kiali chart/
 | networkPolicies.bundled.dynamic.ingress.kiali.ports[0].port | int | `20001` |  |
 | networkPolicies.bundled.dynamic.ingress.kiali.ports[0].protocol | string | `"TCP"` |  |
 | networkPolicies.bundled.dynamic.ssoCidrs[0] | string | `"0.0.0.0/0"` |  |
-| networkPolicies.package.allow-prometheus-mesh-egress.enabled | bool | `true` |  |
-| networkPolicies.package.allow-prometheus-mesh-egress.direction | string | `"Egress"` |  |
-| networkPolicies.package.allow-prometheus-mesh-egress.from | string | `"kiali.kiali"` |  |
-| networkPolicies.package.allow-prometheus-mesh-egress.to | string | `"prometheus.monitoring"` |  |
-| networkPolicies.package.allow-prometheus-mesh-egress.ports[0].port | int | `9090` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.enabled | bool | `true` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.direction | string | `"Egress"` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.from | string | `"kiali.kiali"` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.to | string | `"grafana.monitoring"` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.ports[0].port | int | `3000` |  |
-| networkPolicies.package.allow-grafana-mesh-egress.ports[0].protocol | string | `"TCP"` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.enabled | bool | `true` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.direction | string | `"Egress"` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.from | string | `"kiali.kiali"` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.to | string | `"tempo.tempo"` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.ports[0].port | int | `3100` |  |
-| networkPolicies.package.allow-tempo-mesh-egress.ports[0].protocol | string | `"TCP"` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |

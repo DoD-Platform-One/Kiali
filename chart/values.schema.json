@@ -2,6 +2,40 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Big Bang Kiali Helm Values Schema",
   "type": "object",
+  "$defs": {
+    "additionalPolicy": {
+      "type": "object",
+      "required": [
+        "name",
+        "spec"
+      ],
+      "description": "Additional raw network policy (also accepts 'additional' for backwards compatibility)",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network policy"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Additional labels for the network policy",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "Annotations for the network policy",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "spec": {
+          "type": "object",
+          "description": "Raw NetworkPolicy spec"
+        }
+      }
+    }
+  },
   "properties": {
     "domain": {
       "type": "string",
@@ -10,43 +44,60 @@
     "sso": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" }
+        "enabled": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": false
     },
     "monitoring": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" }
+        "enabled": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": false
     },
     "tracing": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" }
+        "enabled": {
+          "type": "boolean"
+        }
       },
       "additionalProperties": false
     },
     "istio": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" },
+        "enabled": {
+          "type": "boolean"
+        },
         "hardened": {
           "type": "object",
           "properties": {
-            "enabled": { "type": "boolean" },
+            "enabled": {
+              "type": "boolean"
+            },
             "customAuthorizationPolicies": {
               "type": "array",
-              "items": { "type": "object" }
+              "items": {
+                "type": "object"
+              }
             },
             "outboundTrafficPolicyMode": {
               "type": "string",
-              "enum": ["REGISTRY_ONLY", "ALLOW_ANY"]
+              "enum": [
+                "REGISTRY_ONLY",
+                "ALLOW_ANY"
+              ]
             },
             "customServiceEntries": {
               "type": "array",
-              "items": { "type": "object" }
+              "items": {
+                "type": "object"
+              }
             }
           },
           "additionalProperties": false
@@ -56,11 +107,15 @@
           "properties": {
             "gateways": {
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             },
             "hosts": {
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             }
           },
           "additionalProperties": false
@@ -70,7 +125,10 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": ["STRICT", "PERMISSIVE"]
+              "enum": [
+                "STRICT",
+                "PERMISSIVE"
+              ]
             }
           },
           "additionalProperties": false
@@ -80,86 +138,678 @@
     },
     "networkPolicies": {
       "type": "object",
+      "description": "Network policies configuration for the application",
       "properties": {
-        "enabled": { "type": "boolean" },
-        "ingressLabels": {
-          "type": "object",
-          "properties": {
-            "app": { "type": "string" },
-            "istio": { "type": "string" }
-          },
-          "additionalProperties": false
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable network policies",
+          "default": false
         },
-        "controlPlaneCidr": { "type": "string" },
-        "bundled": {
+        "prependReleaseName": {
+          "type": "boolean",
+          "description": "Prepend release name to network policy names",
+          "default": false
+        },
+        "egress": {
           "type": "object",
+          "description": "Egress network policy configuration",
           "properties": {
-            "base": {
+            "excludeCIDRs": {
+              "type": "array",
+              "description": "CIDRs to exclude from all ipBlock egress policies (except literals)",
+              "default": [
+                "169.254.169.254/32"
+              ],
+              "items": {
+                "type": "string",
+                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+              }
+            },
+            "defaults": {
               "type": "object",
+              "description": "Default egress policies",
               "properties": {
-                "enabled": {"type": "boolean"}
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable all default egress policies",
+                  "default": true
+                },
+                "denyAll": {
+                  "type": "object",
+                  "description": "Deny all egress by default",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                },
+                "allowInNamespace": {
+                  "type": "object",
+                  "description": "Allow egress within the same namespace",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                },
+                "allowKubeDns": {
+                  "type": "object",
+                  "description": "Allow DNS resolution (TCP/UDP port 53)",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                },
+                "allowIstiod": {
+                  "type": "object",
+                  "description": "Allow Istio control plane communication (TCP port 15012)",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
               },
               "additionalProperties": false
             },
-            "conditional": {
+            "$defs": {
               "type": "object",
-              "properties": {
-                "enabled": {"type": "boolean"}
-              },
-              "additionalProperties": false
+              "description": "Custom egress rule definitions that can be referenced",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "type": "array",
+                    "description": "List of egress destinations",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "namespaceSelector": {
+                          "type": "object",
+                          "description": "Kubernetes namespace selector"
+                        },
+                        "podSelector": {
+                          "type": "object",
+                          "description": "Kubernetes pod selector"
+                        },
+                        "ipBlock": {
+                          "type": "object",
+                          "description": "IP CIDR block",
+                          "properties": {
+                            "cidr": {
+                              "type": "string",
+                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                            },
+                            "except": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ports": {
+                    "type": "array",
+                    "description": "List of ports",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "oneOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "endPort": {
+                          "type": "integer",
+                          "description": "End port for port range specifications"
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "enum": [
+                            "TCP",
+                            "UDP",
+                            "SCTP"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             },
-            "kubeApiAccess": {
+            "from": {
               "type": "object",
-              "properties": {
-                "enabled": {"type": "boolean"},
-                "controlPlaneCidrs": {"type": "array"}
-              },
-              "additionalProperties": false
+              "description": "Egress rules from local pods",
+              "patternProperties": {
+                "^[\\w-]+$|^\\*$": {
+                  "type": "object",
+                  "description": "Pod name or wildcard (*) for all pods",
+                  "properties": {
+                    "podSelector": {
+                      "type": "object",
+                      "description": "Pod selector for the source pods"
+                    },
+                    "to": {
+                      "type": "object",
+                      "description": "Egress destinations",
+                      "properties": {
+                        "k8s": {
+                          "type": "object",
+                          "description": "Kubernetes pod/namespace destinations",
+                          "patternProperties": {
+                            "^((tcp|udp)://)?([A-Za-z0-9-]+|\\*)(/([A-Za-z0-9-]+|\\*))?(:(\\d+|\\d+-\\d+|\\[?\\d+(,\\d+)*\\]?))?$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "K8s shorthand: [protocol://]<namespace>[/<pod>][:port-spec]"
+                            }
+                          }
+                        },
+                        "cidr": {
+                          "type": "object",
+                          "description": "CIDR block destinations",
+                          "patternProperties": {
+                            "^((tcp|udp)://)?((\\d+\\.){3}\\d+/\\d+)(:(\\d+|\\d+-\\d+|\\[?\\d+(,\\d+)*\\]?))?$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "CIDR shorthand: [protocol://]<cidr>[:port-spec]"
+                            }
+                          }
+                        },
+                        "definition": {
+                          "type": "object",
+                          "description": "Reference to defined rules",
+                          "patternProperties": {
+                            "^[\\w-]+$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "Definition name"
+                            }
+                          }
+                        },
+                        "literal": {
+                          "type": "object",
+                          "description": "Raw NetworkPolicy egress spec",
+                          "patternProperties": {
+                            "^[\\w-]+$": {
+                              "type": "object",
+                              "properties": {
+                                "enabled": {
+                                  "type": "boolean"
+                                },
+                                "spec": {
+                                  "type": "array",
+                                  "description": "Raw NetworkPolicy egress spec",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             },
-            "dynamic": {
+            "definitions": {
               "type": "object",
-              "properties": {
-                "enabled": {"type": "boolean"},
-                "ingressGatewayPorts": {"type": "array"},
-                "ingress": { "type": "object" },
-                "metricsPorts": {"type": "array"},
-                "databaseCidrs": {"type": "array"},
-                "ssoCidrs": {"type": "array"}
-              },
-              "additionalProperties": false
+              "description": "Custom egress rule definitions that can be referenced",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "to": {
+                    "type": "array",
+                    "description": "List of egress destinations",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "namespaceSelector": {
+                          "type": "object",
+                          "description": "Kubernetes namespace selector"
+                        },
+                        "podSelector": {
+                          "type": "object",
+                          "description": "Kubernetes pod selector"
+                        },
+                        "ipBlock": {
+                          "type": "object",
+                          "description": "IP CIDR block",
+                          "properties": {
+                            "cidr": {
+                              "type": "string",
+                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                            },
+                            "except": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ports": {
+                    "type": "array",
+                    "description": "List of ports",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "oneOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "endPort": {
+                          "type": "integer",
+                          "description": "End port for port range specifications"
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "enum": [
+                            "TCP",
+                            "UDP",
+                            "SCTP"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         },
-        "package": {
-          "type": "object"
+        "ingress": {
+          "type": "object",
+          "description": "Ingress network policy configuration",
+          "properties": {
+            "generateAuthorizationPolicies": {
+              "type": "boolean",
+              "description": "Generate Istio AuthorizationPolicies for SPIFFE-based identity verification when service account identities are specified",
+              "default": false
+            },
+            "defaults": {
+              "type": "object",
+              "description": "Default ingress policies",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable all default ingress policies",
+                  "default": true
+                },
+                "denyAll": {
+                  "type": "object",
+                  "description": "Deny all ingress by default",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                },
+                "allowInNamespace": {
+                  "type": "object",
+                  "description": "Allow ingress from same namespace",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "$defs": {
+              "type": "object",
+              "description": "Custom ingress rule definitions that can be referenced",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "array",
+                    "description": "List of ingress sources",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "namespaceSelector": {
+                          "type": "object",
+                          "description": "Kubernetes namespace selector"
+                        },
+                        "podSelector": {
+                          "type": "object",
+                          "description": "Kubernetes pod selector"
+                        },
+                        "ipBlock": {
+                          "type": "object",
+                          "description": "IP CIDR block",
+                          "properties": {
+                            "cidr": {
+                              "type": "string",
+                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                            },
+                            "except": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ports": {
+                    "type": "array",
+                    "description": "List of ports",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "oneOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "endPort": {
+                          "type": "integer",
+                          "description": "End port for port range specifications"
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "enum": [
+                            "TCP",
+                            "UDP",
+                            "SCTP"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "to": {
+              "type": "object",
+              "description": "Ingress rules to local pods",
+              "patternProperties": {
+                "^((tcp|udp)://)?[\\w-]+(:(\\[?\\d+(,\\d+)*\\]?|\\d+|\\d+-\\d+))?$": {
+                  "type": "object",
+                  "description": "Local pod specification: [protocol://]<pod-name>[:port-spec]",
+                  "properties": {
+                    "podSelector": {
+                      "type": "object",
+                      "description": "Pod selector for the destination pods"
+                    },
+                    "from": {
+                      "type": "object",
+                      "description": "Ingress sources",
+                      "properties": {
+                        "k8s": {
+                          "type": "object",
+                          "description": "Kubernetes pod/namespace sources",
+                          "patternProperties": {
+                            "^([A-Za-z0-9-]+@)?([A-Za-z0-9-]+|\\*)(/([A-Za-z0-9-]+|\\*))?$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "K8s shorthand: [<identity>@]<namespace>[/<pod>]"
+                            }
+                          }
+                        },
+                        "cidr": {
+                          "type": "object",
+                          "description": "CIDR block sources",
+                          "patternProperties": {
+                            "^((\\d+\\.){3}\\d+/\\d+)$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "CIDR shorthand: <cidr>"
+                            }
+                          }
+                        },
+                        "definition": {
+                          "type": "object",
+                          "description": "Reference to defined rules",
+                          "patternProperties": {
+                            "^[\\w-]+$": {
+                              "oneOf": [
+                                {
+                                  "type": "boolean"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "enabled": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              ],
+                              "description": "Definition name"
+                            }
+                          }
+                        },
+                        "literal": {
+                          "type": "object",
+                          "description": "Raw NetworkPolicy ingress spec",
+                          "patternProperties": {
+                            "^[\\w-]+$": {
+                              "type": "object",
+                              "properties": {
+                                "enabled": {
+                                  "type": "boolean"
+                                },
+                                "spec": {
+                                  "type": "array",
+                                  "description": "Raw NetworkPolicy ingress spec",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "definitions": {
+              "type": "object",
+              "description": "Custom ingress rule definitions that can be referenced",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "array",
+                    "description": "List of ingress sources",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "namespaceSelector": {
+                          "type": "object",
+                          "description": "Kubernetes namespace selector"
+                        },
+                        "podSelector": {
+                          "type": "object",
+                          "description": "Kubernetes pod selector"
+                        },
+                        "ipBlock": {
+                          "type": "object",
+                          "description": "IP CIDR block",
+                          "properties": {
+                            "cidr": {
+                              "type": "string",
+                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                            },
+                            "except": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "ports": {
+                    "type": "array",
+                    "description": "List of ports",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "oneOf": [
+                            {
+                              "type": "integer"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "endPort": {
+                          "type": "integer",
+                          "description": "End port for port range specifications"
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "enum": [
+                            "TCP",
+                            "UDP",
+                            "SCTP"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
         "additionalPolicies": {
           "type": "array",
-          "items": { "type": "object" }
+          "description": "Additional raw network policies (also accepts 'additional' for backwards compatibility)",
+          "items": {
+            "$ref": "#/$defs/additionalPolicy"
+          }
         },
-        "istioNamespaceSelector": {
-          "type": "object",
-          "properties": {
-            "egress": { "type": "string" },
-            "ingress": { "type": "string" }
-          },
-          "additionalProperties": false
+        "additional": {
+          "type": "array",
+          "description": "Additional raw network policies (also accepts 'additional' for backwards compatibility)",
+          "items": {
+            "$ref": "#/$defs/additionalPolicy"
+          }
         }
-      },
-      "additionalProperties": false
+      }
     },
     "bbtests": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" },
+        "enabled": {
+          "type": "boolean"
+        },
         "cypress": {
           "type": "object",
           "properties": {
-            "artifacts": { "type": "boolean" },
+            "artifacts": {
+              "type": "boolean"
+            },
             "envs": {
               "type": "object",
               "properties": {
-                "cypress_url": { "type": "string" }
+                "cypress_url": {
+                  "type": "string"
+                }
               },
               "additionalProperties": true
             }
@@ -177,11 +827,15 @@
     "waitJob": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" },
+        "enabled": {
+          "type": "boolean"
+        },
         "scripts": {
           "type": "object",
           "properties": {
-            "image": { "type": "string" }
+            "image": {
+              "type": "string"
+            }
           },
           "additionalProperties": false
         },
@@ -190,11 +844,15 @@
           "properties": {
             "apiGroups": {
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             },
             "resources": {
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             }
           },
           "additionalProperties": false
@@ -222,4 +880,4 @@
     }
   },
   "additionalProperties": false
-} 
+}

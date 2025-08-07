@@ -1,0 +1,35 @@
+suite: test network policies
+templates:
+  - templates/bigbang/network-policies.yaml
+set:
+  networkPolicies.enabled: true
+tests:
+  - it: should create network policies when enabled
+    documentSelector:
+      path: metadata.name
+      value: default-ingress-deny-all
+    asserts:
+      - isKind:
+          of: NetworkPolicy
+      - equal:
+          path: metadata.name
+          value: default-ingress-deny-all
+  - it: should create network policies to allow ingress from istio gateway
+    documentSelector:
+      path: metadata.name
+      value: allow-ingress-to-kiali-from-gateway
+    asserts:
+      - isKind:
+          of: NetworkPolicy
+      - equal:
+          path: metadata.name
+          value: allow-ingress-to-kiali-from-gateway
+      - equal:
+          path: spec.ingress[0].from
+          value: 
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: istio-gateway
+              podSelector:
+                matchLabels:
+                  istio: ingressgateway
