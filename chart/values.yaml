@@ -31,54 +31,39 @@ monitoring:
 
 networkPolicies:
   enabled: false
-  ingressLabels:
-    app: istio-ingressgateway
-    istio: ingressgateway
-  # See `kubectl cluster-info` and then resolve to IP
-  bundled:
-    base:
-      enabled: true
-    conditional:
-      enabled: true
-    kubeApiAccess:
-      enabled: true
-      controlPlaneCidrs:
-      - 10.0.0.0/8
-      - 172.16.0.0/12
-      - 192.168.0.0/16
-    dynamic:
-      enabled: true
-      ingress:
-        kiali:
-          ports:
-          - port: 20001
-            protocol: TCP
-      ssoCidrs:
-      - 0.0.0.0/0
-  package:
-    allow-prometheus-mesh-egress:
-      enabled: true
-      direction: Egress
-      from: kiali.kiali
-      to: prometheus.monitoring
-      ports:
-      - port: 9090
-    allow-grafana-mesh-egress:
-      enabled: true
-      direction: Egress
-      from: kiali.kiali
-      to: grafana.monitoring
-      ports:
-      - port: 3000
-        protocol: TCP
-    allow-tempo-mesh-egress:
-      enabled: true
-      direction: Egress
-      from: kiali.kiali
-      to: tempo.tempo
-      ports:
-      - port: 3100
-        protocol: TCP
+  ingress:
+    to:
+      kiali:
+        from:
+          definition:
+            gateway: true
+  egress:
+    definitions:
+      sso:
+        to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
+    from:
+      "*":
+        to:
+          definition:
+            kubeAPI: true
+      kiali:
+        to:
+          k8s:
+            monitoring/prometheus:9090: false
+            monitoring/grafana:3000: false
+            tempo/tempo:3100: false
+            istio-system/istiod:15014: false
+          definition:
+            sso: false
+      helm-test:
+        podSelector:
+          matchLabels:
+            helm-test: enabled
+        to:
+          cidr:
+            0.0.0.0/0: true
   additionalPolicies: []
 
 bbtests:

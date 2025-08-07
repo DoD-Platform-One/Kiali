@@ -1,0 +1,17 @@
+suite: test kiali chart
+templates:
+  - templates/bigbang/virtualservice.yaml
+tests:
+  - it: should create virtual service when istio is enabled
+    set:
+      istio.enabled: true
+      domain: example.com
+    asserts:
+      - isKind:
+          of: VirtualService
+      - equal:
+          path: metadata.name
+          value: kiali
+      - contains:
+          path: spec.hosts
+          content: kiali.example.com
