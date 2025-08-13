@@ -44,9 +44,6 @@ monitoring:
 neuvector:
   enabled: false
 
-promtail:
-  enabled: false
-
 tempo:
   enabled: false
 
