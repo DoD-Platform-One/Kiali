@@ -513,6 +513,16 @@
                       "default": true
                     }
                   }
+                },
+                "allowPrometheusToIstioSidecar": {
+                  "type": "object",
+                  "description": "Allow ingress from Prometheus in monitoring namespace (TCP port 15020)",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
                 }
               },
               "additionalProperties": false

@@ -7,19 +7,31 @@ networkPolicies:
   enabled: true
 monitoring:
   enabled: true
+  values:
+    bbtests:
+      enabled: false
 grafana:
   enabled: true
+  values:
+    bbtests:
+      enabled: false
 neuvector:
   enabled: false
 loki:
   enabled: false
 tempo:
   enabled: false
+  values:
+    bbtests:
+      enabled: false
 kyvernoReporter:
   enabled: false
 addons:
   minioOperator:
     enabled: true
+    values:
+      bbtests:
+        enabled: false
 ########################
 # Required for package #
 ########################
@@ -28,11 +40,6 @@ kyvernoPolicies:
     bbtests:
       enabled: false
 kyverno:
-  values:
-    bbtests:
-      enabled: false
-tempo:
-  enabled: false
   values:
     bbtests:
       enabled: false
