@@ -57,6 +57,23 @@ describe('Kiali', function () {
     cy.get('svg[fill="var(--pf-global--danger-color--100)"]').should('not.exist');
   })
 
+  it('should verify Kiali sidecar metrics are up', { retries: 3 }, function () {
+    // assuming cypress env url is kiali.dev.bigbang.mil, use the base domain to compute prometheus url
+    const prometheusBaseUrl = Cypress.env('url').replace('kiali', 'prometheus')
+
+    // Load the Prometheus targets page with a specific scrape pool and filter (Kiali)
+    cy.visit(`${prometheusBaseUrl}/targets?pool=podMonitor%2Fmonitoring%2Fmonitoring-monitoring-kube-istio-envoy%2F0&search=kiali`)
+
+    // Verify the scrape pool is displayed
+    cy.contains('podMonitor/monitoring/monitoring-monitoring-kube-istio-envoy/0').should('exist')
+
+    // Get all table rows with target data and verify each shows "up" status (should be at least two)
+    cy.get('table tbody tr').should('have.length.gte', 2).each(($row) => {
+      // Each row should contain "up" status indicator
+      cy.wrap($row).should('contain.text', 'up')
+    })
+  })
+
   // Skip remaining tests if check_data is not set
   // These tests should only run in BB CI since nothing is istio injected in Package CI
   if (!Cypress.env("check_data")) {
@@ -66,6 +83,7 @@ describe('Kiali', function () {
   context('check_data is set', function () {
 
     it('pops out the side menu', function () {
+      cy.visit(Cypress.env('url'))
       expandMenu();
     })
 
