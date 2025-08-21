@@ -57,13 +57,6 @@ networkPolicies:
             istio-system/istiod:15014: false
           definition:
             sso: false
-      helm-test:
-        podSelector:
-          matchLabels:
-            helm-test: enabled
-        to:
-          cidr:
-            0.0.0.0/0: true
   additionalPolicies: []
 
 bbtests:
@@ -91,7 +84,7 @@ upstream:
 
   image:
     repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-    tag: v2.13.0
+    tag: v2.14.0
     pullPolicy: IfNotPresent
     pullSecrets:
       - private-registry
@@ -126,12 +119,11 @@ upstream:
     spec:
       server:
         port: 20001
-      istio_namespace: istio-system
       auth:
         strategy: "anonymous"
       deployment:
         image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-        image_version: v2.13.0
+        image_version: v2.14.0
         image_pull_secrets:
           - private-registry
         resources:
