@@ -36,12 +36,6 @@ istiod:
 istioGateway:
   enabled: true
 
-istio:
-  enabled: false
-
-istioOperator:
-  enabled: false
-
 monitoring:
   enabled: true
 
