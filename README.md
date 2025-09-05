@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.14.0-bb.0](https://img.shields.io/badge/Version-2.14.0--bb.0-informational?style=flat-square) ![AppVersion: 2.14.0](https://img.shields.io/badge/AppVersion-2.14.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.15.0-bb.0](https://img.shields.io/badge/Version-2.15.0--bb.0-informational?style=flat-square) ![AppVersion: 2.15.0](https://img.shields.io/badge/AppVersion-2.15.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -65,8 +65,6 @@ helm install kiali chart/
 | networkPolicies.egress.from.kiali.to.k8s.tempo/tempo:3100 | bool | `false` |  |
 | networkPolicies.egress.from.kiali.to.k8s.istio-system/istiod:15014 | bool | `false` |  |
 | networkPolicies.egress.from.kiali.to.definition.sso | bool | `false` |  |
-| networkPolicies.egress.from.helm-test.podSelector.matchLabels.helm-test | string | `"enabled"` |  |
-| networkPolicies.egress.from.helm-test.to.cidr."0.0.0.0/0" | bool | `true` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
@@ -80,7 +78,7 @@ helm install kiali chart/
 | waitJob.permissions.resources[1] | string | `"kialis"` |  |
 | upstream.nameOverride | string | `"kiali-operator"` |  |
 | upstream.image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| upstream.image.tag | string | `"v2.14.0"` |  |
+| upstream.image.tag | string | `"v2.15.0"` |  |
 | upstream.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
 | upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -94,10 +92,9 @@ helm install kiali chart/
 | upstream.allowSecurityContextOverride | bool | `true` |  |
 | upstream.cr.create | bool | `true` |  |
 | upstream.cr.spec.server.port | int | `20001` |  |
-| upstream.cr.spec.istio_namespace | string | `"istio-system"` |  |
 | upstream.cr.spec.auth.strategy | string | `"anonymous"` |  |
 | upstream.cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| upstream.cr.spec.deployment.image_version | string | `"v2.14.0"` |  |
+| upstream.cr.spec.deployment.image_version | string | `"v2.15.0"` |  |
 | upstream.cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | upstream.cr.spec.deployment.resources.requests.cpu | string | `"100m"` |  |
 | upstream.cr.spec.deployment.resources.requests.memory | string | `"128Mi"` |  |
