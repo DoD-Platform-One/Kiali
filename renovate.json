@@ -1,32 +1,53 @@
 {
-    "baseBranches": ["main"],
+    "baseBranches": [
+        "main"
+    ],
     "configWarningReuseIssue": false,
     "dependencyDashboard": true,
     "dependencyDashboardTitle": "Renovate: Upgrade Kiali Package Dependencies",
     "draftPR": true,
-    "enabledManagers": ["helm-values","regex", "helmv3"],
-    "ignorePaths": ["chart/charts/**"],
-    "labels": ["kiali","renovate"],
+    "enabledManagers": [
+        "helm-values",
+        "custom.regex",
+        "helmv3"
+    ],
+    "ignorePaths": [
+        "chart/charts/**"
+    ],
+    "labels": [
+        "kiali",
+        "renovate"
+    ],
     "packageRules": [
         {
-          "matchDatasources": ["docker"],
-          "groupName": "Ironbank"
+            "matchDatasources": [
+                "docker"
+            ],
+            "groupName": "Ironbank"
         },
         {
-            "matchPackageNames": ["registry1.dso.mil/ironbank/big-bang/base"],
+            "matchPackageNames": [
+                "registry1.dso.mil/ironbank/big-bang/base"
+            ],
             "allowedVersions": "!/8.4/"
-        }      
+        }
     ],
-    "regexManagers": [
+    "customManagers": [
         {
-            "fileMatch": ["^chart/values\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/values\\.yaml$"
+            ],
             "matchStrings": [
                 "(repo|image_name|repository)\\S*:\\s*(?<depName>\\S+).*\n\\s+(tag|image_version):\\s*(?<currentValue>.+)"
             ],
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/Chart\\.yaml$"
+            ],
             "matchStrings": [
                 "- Kiali:\\s*(?<currentValue>.+)",
                 "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
@@ -36,7 +57,10 @@
             "datasourceTemplate": "docker"
         },
         {
-            "fileMatch": ["^chart/Chart\\.yaml$"],
+            "customType": "regex",
+            "fileMatch": [
+                "^chart/Chart\\.yaml$"
+            ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
             ],
@@ -44,5 +68,7 @@
         }
     ],
     "separateMajorMinor": false,
-    "postUpdateOptions": ["helmUpdateSubChartArchives"]
+    "postUpdateOptions": [
+        "helmUpdateSubChartArchives"
+    ]
 }
