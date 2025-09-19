@@ -35,8 +35,8 @@
     "customManagers": [
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/values\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/values\\.yaml$/"
             ],
             "matchStrings": [
                 "(repo|image_name|repository)\\S*:\\s*(?<depName>\\S+).*\n\\s+(tag|image_version):\\s*(?<currentValue>.+)"
@@ -45,8 +45,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/Chart\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/Chart\\.yaml$/"
             ],
             "matchStrings": [
                 "- Kiali:\\s*(?<currentValue>.+)",
@@ -58,8 +58,8 @@
         },
         {
             "customType": "regex",
-            "fileMatch": [
-                "^chart/Chart\\.yaml$"
+            "managerFilePatterns": [
+                "/^chart/Chart\\.yaml$/"
             ],
             "matchStrings": [
                 "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
