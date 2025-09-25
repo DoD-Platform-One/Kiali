@@ -9,9 +9,6 @@ process is incredibly simple.
 
 1. Checkout the `renovate/ironbank` branch. You can either work off of this branch or branch off of it.
 1. Check the [upstream repo](https://github.com/kiali/helm-charts/tags) for chart updates.
-1. Note that Iron Bank does not automatically update kiali-operator with Renovate. Verify that the version of the kiali image to which you'll be updating and the kiali-operator version match (to do this look at how the MR will change the `annotation.helm.sh/images` section in [chart/Chart.yaml](../chart/Chart.yaml)).
-    - If the kiali and kiali-operator image versions match, proceed to the next step that handles the helm dependency update.
-    - If they do not match, open an issue with Iron Bank [here](https://repo1.dso.mil/dsop/opensource/kiali/kiali-operator/-/issues) to have them update kiali-operator manually. It's also a good idea to ping them in the [BB <-> IB channel in IL4 Mattermost](https://chat.il4.dso.mil/platform-one/channels/bbib-coordination-and-collaboration) to let them know you've opened this issue. See the [Testing kiali-operator image updates](#testing-kiali-operator-image-updates) subsection below for important details on the process of updating the kiali-operator image and testing Kiali with the new image.
 1. Update dependencies to latest versions.
 
     ```sh
@@ -26,18 +23,6 @@ process is incredibly simple.
 1. Generate the [README.md](../README.md) using the [gluon library script](https://repo1.dso.mil/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md) guidelines noting any additional chart changes you make during development testing.
 1. Push your changes, validate that the CI pipeline passes. If there are any failures follow the information in the pipeline to make the necessary updates and reach out to the team if needed.
 1. Deploy and test Kiali with the [testing steps below](#testing-kiali-updates). The CI pipeline provides a good set of basic smoke tests but it is beneficial to run some additional checks.
-
-## Testing kiali-operator image updates
-
-Iron Bank will initially push the updated kiali-operator image to staging at a url such as: `registry1.dso.mil/ironbank-staging/opensource/kiali/kiali-operator:v1.84.0`
-⚠️ Note you will not be able to direcly pull or view images from the `ironbank-staging` project with your registry1 user account.
-
-1. Update the references to the kiali-operator in [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) to point to this image in staging.
-1. Follow the steps above in the `Code Changes for Updates/Renovates` section to finish updating Kiali on your branch.
-1. Once the package pipeline passes and Kiali passes all the testing steps, let Iron Bank know that they can push the kiali-operator image to production via the [BB <-> IB channel in IL4 Mattermost](https://chat.il4.dso.mil/platform-one/channels/bbib-coordination-and-collaboration).
-1. Once the kiali-operator image is in production, you'll want to point to the production image by editing [chart/Chart.yaml](../chart/Chart.yaml) and [chart/values.yaml](../chart/values.yaml) again to point to the production image. For example: `registry1.dso.mil/ironbank/opensource/kiali/kiali-operator:v1.84.0`.
-1. Generate the [README.md](../README.md) using the [gluon library script](https://repo1.dso.mil/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md) guidelines noting any additional chart changes you make during development testing.
-1. Confirm that the package pipeline passes with these changes and test again with the [testing steps below](#testing-kiali-updates) before putting your MR in review status.
 
 ## Testing kiali updates
 
