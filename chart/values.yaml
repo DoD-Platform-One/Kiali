@@ -3,6 +3,17 @@ domain: bigbang.dev
 sso:
   enabled: false
 
+routes:
+  inbound:
+    kiali:
+      enabled: true
+      gateways:
+        - istio-gateway/public-ingressgateway
+      hosts:
+        - kiali.{{ .Values.domain }}
+      service: kiali.kiali.svc.cluster.local
+      port: 20001
+
 istio:
   enabled: false
   hardened:
@@ -10,12 +21,6 @@ istio:
     customAuthorizationPolicies: []
     outboundTrafficPolicyMode: "REGISTRY_ONLY"
     customServiceEntries: []
-
-  kiali:
-    gateways:
-      - "istio-system/main"
-    hosts:
-      - kiali.{{ .Values.domain }}
 
   # Default kiali peer authentication
   mtls:
@@ -31,12 +36,6 @@ monitoring:
 
 networkPolicies:
   enabled: false
-  ingress:
-    to:
-      kiali:
-        from:
-          definition:
-            gateway: true
   egress:
     definitions:
       sso:

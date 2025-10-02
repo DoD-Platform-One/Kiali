@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.16.0-bb.0](https://img.shields.io/badge/Version-2.16.0--bb.0-informational?style=flat-square) ![AppVersion: 2.16.0](https://img.shields.io/badge/AppVersion-2.16.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.16.0-bb.1](https://img.shields.io/badge/Version-2.16.0--bb.1-informational?style=flat-square) ![AppVersion: 2.16.0](https://img.shields.io/badge/AppVersion-2.16.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -46,18 +46,20 @@ helm install kiali chart/
 |-----|------|---------|-------------|
 | domain | string | `"bigbang.dev"` |  |
 | sso.enabled | bool | `false` |  |
+| routes.inbound.kiali.enabled | bool | `true` |  |
+| routes.inbound.kiali.gateways[0] | string | `"istio-gateway/public-ingressgateway"` |  |
+| routes.inbound.kiali.hosts[0] | string | `"kiali.{{ .Values.domain }}"` |  |
+| routes.inbound.kiali.service | string | `"kiali.kiali.svc.cluster.local"` |  |
+| routes.inbound.kiali.port | int | `20001` |  |
 | istio.enabled | bool | `false` |  |
 | istio.hardened.enabled | bool | `false` |  |
 | istio.hardened.customAuthorizationPolicies | list | `[]` |  |
 | istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
 | istio.hardened.customServiceEntries | list | `[]` |  |
-| istio.kiali.gateways[0] | string | `"istio-system/main"` |  |
-| istio.kiali.hosts[0] | string | `"kiali.{{ .Values.domain }}"` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
 | tracing.enabled | bool | `true` |  |
 | monitoring.enabled | bool | `true` |  |
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.ingress.to.kiali.from.definition.gateway | bool | `true` |  |
 | networkPolicies.egress.definitions.sso.to[0].ipBlock.cidr | string | `"0.0.0.0/0"` |  |
 | networkPolicies.egress.from.*.to.definition.kubeAPI | bool | `true` |  |
 | networkPolicies.egress.from.kiali.to.k8s.monitoring/prometheus:9090 | bool | `false` |  |
@@ -70,7 +72,6 @@ helm install kiali chart/
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://kiali:20001"` |  |
 | waitJob.enabled | bool | `true` |  |
-| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5"` |  |
 | waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
 | waitJob.permissions.apiGroups[1] | string | `"kiali.io"` |  |
 | waitJob.permissions.apiGroups[2] | string | `"kiali.io/v1alpha1"` |  |
