@@ -1,11 +1,18 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
 suite: test kiali chart
 templates:
-  - templates/bigbang/virtualservice.yaml
+  - templates/bigbang/routes.yaml
+capabilities:
+  apiVersions:
+    - networking.istio.io/v1
 tests:
   - it: should create virtual service when istio is enabled
     set:
       istio.enabled: true
       domain: example.com
+    documentSelector:
+      path: kind
+      value: VirtualService
     asserts:
       - isKind:
           of: VirtualService
@@ -15,3 +22,20 @@ tests:
       - contains:
           path: spec.hosts
           content: kiali.example.com
+  - it: should create network policies to allow ingress from istio gateway
+    documentSelector:
+      path: metadata.name
+      value: allow-ingress-to-kiali-20001-from-ns-istio-gateway-pod-public-ingressgateway
+    asserts:
+      - isKind:
+          of: NetworkPolicy
+      - equal:
+          path: spec.ingress[0].from
+          value: 
+            - namespaceSelector:
+                matchLabels:
+                  kubernetes.io/metadata.name: istio-gateway
+              podSelector:
+                matchLabels:
+                  app.kubernetes.io/name: public-ingressgateway
+                  istio: ingressgateway

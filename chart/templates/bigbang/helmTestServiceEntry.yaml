@@ -9,9 +9,6 @@ metadata:
 spec:
   hosts:
   - repo1.dso.mil
-  {{- range .Values.istio.kiali.hosts }}
-  - {{ tpl . $}}
-  {{- end }}
   location: MESH_EXTERNAL
   ports:
   - name: https

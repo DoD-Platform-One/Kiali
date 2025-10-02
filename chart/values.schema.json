@@ -150,6 +150,61 @@
           "description": "Prepend release name to network policy names",
           "default": false
         },
+        "defaultsAsHooks": {
+          "type": "object",
+          "description": "Create hook versions of default policies in addition to regular versions",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable hook creation for default policies (creates both regular and hook versions)",
+              "default": false
+            },
+            "hooks": {
+              "type": "array",
+              "description": "Helm hook types",
+              "default": [
+                "pre-install",
+                "pre-upgrade",
+                "post-delete"
+              ],
+              "items": {
+                "type": "string",
+                "enum": [
+                  "pre-install",
+                  "post-install",
+                  "pre-delete",
+                  "post-delete",
+                  "pre-upgrade",
+                  "post-upgrade",
+                  "pre-rollback",
+                  "post-rollback",
+                  "test"
+                ]
+              }
+            },
+            "weight": {
+              "type": "integer",
+              "description": "Helm hook weight for execution order",
+              "default": -5
+            },
+            "deletePolicies": {
+              "type": "array",
+              "description": "Helm hook delete policies",
+              "default": [
+                "hook-succeeded",
+                "before-hook-creation"
+              ],
+              "items": {
+                "type": "string",
+                "enum": [
+                  "before-hook-creation",
+                  "hook-succeeded",
+                  "hook-failed"
+                ]
+              }
+            }
+          }
+        },
         "egress": {
           "type": "object",
           "description": "Egress network policy configuration",
@@ -217,7 +272,7 @@
               },
               "additionalProperties": false
             },
-            "$defs": {
+            "definitions": {
               "type": "object",
               "description": "Custom egress rule definitions that can be referenced",
               "additionalProperties": {
@@ -303,6 +358,26 @@
                       "type": "object",
                       "description": "Pod selector for the source pods"
                     },
+                    "metadata": {
+                      "type": "object",
+                      "description": "Metadata for generated network policies",
+                      "properties": {
+                        "labels": {
+                          "type": "object",
+                          "description": "Additional labels for generated network policies",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "annotations": {
+                          "type": "object",
+                          "description": "Annotations for generated network policies",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
                     "to": {
                       "type": "object",
                       "description": "Egress destinations",
@@ -321,6 +396,34 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "podSelector": {
+                                      "type": "object",
+                                      "description": "Override pod selector for the destination"
+                                    },
+                                    "namespaceSelector": {
+                                      "type": "object",
+                                      "description": "Override namespace selector for the destination"
                                     }
                                   }
                                 }
@@ -343,6 +446,26 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -365,6 +488,26 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -383,6 +526,20 @@
                                 "enabled": {
                                   "type": "boolean"
                                 },
+                                "labels": {
+                                  "type": "object",
+                                  "description": "Additional labels for generated network policies",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                },
+                                "annotations": {
+                                  "type": "object",
+                                  "description": "Annotations for generated network policies",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                },
                                 "spec": {
                                   "type": "array",
                                   "description": "Raw NetworkPolicy egress spec",
@@ -393,80 +550,6 @@
                               }
                             }
                           }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "definitions": {
-              "type": "object",
-              "description": "Custom egress rule definitions that can be referenced",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "to": {
-                    "type": "array",
-                    "description": "List of egress destinations",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "namespaceSelector": {
-                          "type": "object",
-                          "description": "Kubernetes namespace selector"
-                        },
-                        "podSelector": {
-                          "type": "object",
-                          "description": "Kubernetes pod selector"
-                        },
-                        "ipBlock": {
-                          "type": "object",
-                          "description": "IP CIDR block",
-                          "properties": {
-                            "cidr": {
-                              "type": "string",
-                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
-                            },
-                            "except": {
-                              "type": "array",
-                              "items": {
-                                "type": "string",
-                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "ports": {
-                    "type": "array",
-                    "description": "List of ports",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "port": {
-                          "oneOf": [
-                            {
-                              "type": "integer"
-                            },
-                            {
-                              "type": "string"
-                            }
-                          ]
-                        },
-                        "endPort": {
-                          "type": "integer",
-                          "description": "End port for port range specifications"
-                        },
-                        "protocol": {
-                          "type": "string",
-                          "enum": [
-                            "TCP",
-                            "UDP",
-                            "SCTP"
-                          ]
                         }
                       }
                     }
@@ -527,7 +610,7 @@
               },
               "additionalProperties": false
             },
-            "$defs": {
+            "definitions": {
               "type": "object",
               "description": "Custom ingress rule definitions that can be referenced",
               "additionalProperties": {
@@ -613,6 +696,26 @@
                       "type": "object",
                       "description": "Pod selector for the destination pods"
                     },
+                    "metadata": {
+                      "type": "object",
+                      "description": "Metadata for generated network policies",
+                      "properties": {
+                        "labels": {
+                          "type": "object",
+                          "description": "Additional labels for generated network policies",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        },
+                        "annotations": {
+                          "type": "object",
+                          "description": "Annotations for generated network policies",
+                          "additionalProperties": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
                     "from": {
                       "type": "object",
                       "description": "Ingress sources",
@@ -631,6 +734,34 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "podSelector": {
+                                      "type": "object",
+                                      "description": "Override pod selector for the source"
+                                    },
+                                    "namespaceSelector": {
+                                      "type": "object",
+                                      "description": "Override namespace selector for the source"
                                     }
                                   }
                                 }
@@ -653,6 +784,26 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -675,6 +826,26 @@
                                   "properties": {
                                     "enabled": {
                                       "type": "boolean"
+                                    },
+                                    "metadata": {
+                                      "type": "object",
+                                      "description": "Metadata for generated network policies",
+                                      "properties": {
+                                        "labels": {
+                                          "type": "object",
+                                          "description": "Additional labels for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "annotations": {
+                                          "type": "object",
+                                          "description": "Annotations for generated network policies",
+                                          "additionalProperties": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
                                     }
                                   }
                                 }
@@ -693,6 +864,20 @@
                                 "enabled": {
                                   "type": "boolean"
                                 },
+                                "labels": {
+                                  "type": "object",
+                                  "description": "Additional labels for generated network policies",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                },
+                                "annotations": {
+                                  "type": "object",
+                                  "description": "Annotations for generated network policies",
+                                  "additionalProperties": {
+                                    "type": "string"
+                                  }
+                                },
                                 "spec": {
                                   "type": "array",
                                   "description": "Raw NetworkPolicy ingress spec",
@@ -703,80 +888,6 @@
                               }
                             }
                           }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "definitions": {
-              "type": "object",
-              "description": "Custom ingress rule definitions that can be referenced",
-              "additionalProperties": {
-                "type": "object",
-                "properties": {
-                  "from": {
-                    "type": "array",
-                    "description": "List of ingress sources",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "namespaceSelector": {
-                          "type": "object",
-                          "description": "Kubernetes namespace selector"
-                        },
-                        "podSelector": {
-                          "type": "object",
-                          "description": "Kubernetes pod selector"
-                        },
-                        "ipBlock": {
-                          "type": "object",
-                          "description": "IP CIDR block",
-                          "properties": {
-                            "cidr": {
-                              "type": "string",
-                              "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
-                            },
-                            "except": {
-                              "type": "array",
-                              "items": {
-                                "type": "string",
-                                "pattern": "^((\\d+\\.){3}\\d+/\\d+)$"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "ports": {
-                    "type": "array",
-                    "description": "List of ports",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "port": {
-                          "oneOf": [
-                            {
-                              "type": "integer"
-                            },
-                            {
-                              "type": "string"
-                            }
-                          ]
-                        },
-                        "endPort": {
-                          "type": "integer",
-                          "description": "End port for port range specifications"
-                        },
-                        "protocol": {
-                          "type": "string",
-                          "enum": [
-                            "TCP",
-                            "UDP",
-                            "SCTP"
-                          ]
                         }
                       }
                     }
@@ -887,6 +998,213 @@
     "openshift": {
       "type": "boolean",
       "description": "Enable OpenShift-specific resources."
+    },
+    "routes": {
+      "type": "object",
+      "description": "Istio VirtualService and gateway configuration for routing traffic to applications",
+      "properties": {
+        "inbound": {
+          "type": "object",
+          "description": "Inbound routes configuration",
+          "patternProperties": {
+            "^[a-zA-Z0-9][a-zA-Z0-9_-]*$": {
+              "type": "object",
+              "description": "Named route configuration",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable this route",
+                  "default": true
+                },
+                "gateways": {
+                  "type": "array",
+                  "description": "List of Istio gateways to bind this VirtualService to",
+                  "items": {
+                    "type": "string",
+                    "description": "Gateway reference in format 'namespace/gateway-name'"
+                  },
+                  "minItems": 1
+                },
+                "hosts": {
+                  "type": "array",
+                  "description": "List of host/domain names for this route. Supports templating.",
+                  "items": {
+                    "type": "string",
+                    "description": "Hostname or domain. Can use Helm templating (e.g., '{{ .Values.domain }}')"
+                  },
+                  "minItems": 1
+                },
+                "service": {
+                  "type": "string",
+                  "description": "Target Kubernetes service name or FQDN. Supports templating."
+                },
+                "port": {
+                  "oneOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "description": "Target service port number. Supports templating for string values."
+                },
+                "metadata": {
+                  "type": "object",
+                  "description": "Metadata applied to all generated resources",
+                  "properties": {
+                    "labels": {
+                      "type": "object",
+                      "description": "Additional labels for all generated resources",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "annotations": {
+                      "type": "object",
+                      "description": "Additional annotations for all generated resources",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "selector": {
+                  "type": "object",
+                  "description": "Pod selector for generating NetworkPolicy and AuthorizationPolicy resources. When provided, automatic ingress policies will be created.",
+                  "properties": {
+                    "matchLabels": {
+                      "type": "object",
+                      "description": "Label selector for target pods",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "matchExpressions": {
+                      "type": "array",
+                      "description": "Expression-based label selector",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "operator": {
+                            "type": "string",
+                            "enum": [
+                              "In",
+                              "NotIn",
+                              "Exists",
+                              "DoesNotExist"
+                            ]
+                          },
+                          "values": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "http": {
+                  "type": "array",
+                  "description": "Advanced HTTP routing rules. When not specified, simple routing to service:port is used.",
+                  "items": {
+                    "type": "object",
+                    "description": "Istio HTTPRoute configuration",
+                    "properties": {
+                      "match": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "route": {
+                        "type": "array",
+                        "items": {
+                          "type": "object"
+                        }
+                      },
+                      "redirect": {
+                        "type": "object"
+                      },
+                      "rewrite": {
+                        "type": "object"
+                      },
+                      "timeout": {
+                        "type": "string"
+                      },
+                      "retries": {
+                        "type": "object"
+                      },
+                      "fault": {
+                        "type": "object"
+                      },
+                      "mirror": {
+                        "type": "object"
+                      },
+                      "corsPolicy": {
+                        "type": "object"
+                      },
+                      "headers": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "enabled",
+                "gateways",
+                "hosts"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "http"
+                        ],
+                        "description": "Advanced routing with custom http configuration"
+                      },
+                      {
+                        "required": [
+                          "service",
+                          "port"
+                        ],
+                        "not": {
+                          "required": [
+                            "http"
+                          ]
+                        },
+                        "description": "Simple routing requires service and port when http is not provided"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false
