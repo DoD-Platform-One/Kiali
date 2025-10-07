@@ -951,14 +951,8 @@
         "enabled": {
           "type": "boolean"
         },
-        "scripts": {
-          "type": "object",
-          "properties": {
-            "image": {
-              "type": "string"
-            }
-          },
-          "additionalProperties": false
+        "image": {
+          "type": "string"
         },
         "permissions": {
           "type": "object",
