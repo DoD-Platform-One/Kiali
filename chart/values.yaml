@@ -37,25 +37,11 @@ monitoring:
 networkPolicies:
   enabled: false
   egress:
-    definitions:
-      sso:
-        to:
-          - ipBlock:
-              cidr: 0.0.0.0/0
     from:
       "*":
         to:
           definition:
             kubeAPI: true
-      kiali:
-        to:
-          k8s:
-            monitoring/prometheus:9090: false
-            monitoring/grafana:3000: false
-            tempo/tempo:3100: false
-            istio-system/istiod:15014: false
-          definition:
-            sso: false
   additionalPolicies: []
 
 bbtests:
@@ -81,7 +67,7 @@ upstream:
 
   image:
     repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-    tag: v2.16.0
+    tag: v2.17.0
     pullPolicy: IfNotPresent
     pullSecrets:
       - private-registry
@@ -120,7 +106,7 @@ upstream:
         strategy: "anonymous"
       deployment:
         image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-        image_version: v2.16.0
+        image_version: v2.17.0
         image_pull_secrets:
           - private-registry
         resources:
