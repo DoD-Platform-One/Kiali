@@ -60,12 +60,13 @@ describe('Kiali', function () {
   it('should verify Kiali sidecar metrics are up', { retries: 3 }, function () {
     // assuming cypress env url is kiali.dev.bigbang.mil, use the base domain to compute prometheus url
     const prometheusBaseUrl = Cypress.env('url').replace('kiali', 'prometheus')
+    const podMonitorName = Cypress.env("pod_monitor_name") || "monitoring-monitoring-kube-istio-envoy"
 
     // Load the Prometheus targets page with a specific scrape pool and filter (Kiali)
-    cy.visit(`${prometheusBaseUrl}/targets?pool=podMonitor%2Fmonitoring%2Fmonitoring-monitoring-kube-istio-envoy%2F0&search=kiali`)
+    cy.visit(`${prometheusBaseUrl}/targets?pool=podMonitor%2Fmonitoring%2F${podMonitorName}%2F0&search=kiali`)
 
     // Verify the scrape pool is displayed
-    cy.contains('podMonitor/monitoring/monitoring-monitoring-kube-istio-envoy/0').should('exist')
+    cy.contains(`podMonitor/monitoring/${podMonitorName}/0`).should('exist')
 
     // Get all table rows with target data and verify each shows "up" status (should be at least two)
     cy.get('table tbody tr').should('have.length.gte', 2).each(($row) => {

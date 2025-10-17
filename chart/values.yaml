@@ -50,6 +50,7 @@ bbtests:
     artifacts: true
     envs:
       cypress_url: "http://kiali:20001"
+      pod_monitor_name: "monitoring-monitoring-kube-istio-envoy"
 
 waitJob:
   enabled: true

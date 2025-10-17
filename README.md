@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.17.0-bb.0](https://img.shields.io/badge/Version-2.17.0--bb.0-informational?style=flat-square) ![AppVersion: 2.17.0](https://img.shields.io/badge/AppVersion-2.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.17.0-bb.1](https://img.shields.io/badge/Version-2.17.0--bb.1-informational?style=flat-square) ![AppVersion: 2.17.0](https://img.shields.io/badge/AppVersion-2.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -60,12 +60,12 @@ helm install kiali chart/
 | tracing.enabled | bool | `true` |  |
 | monitoring.enabled | bool | `true` |  |
 | networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.egress.definitions.sso.to[0].ipBlock.cidr | string | `"0.0.0.0/0"` |  |
 | networkPolicies.egress.from.*.to.definition.kubeAPI | bool | `true` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://kiali:20001"` |  |
+| bbtests.cypress.envs.pod_monitor_name | string | `"monitoring-monitoring-kube-istio-envoy"` |  |
 | waitJob.enabled | bool | `true` |  |
 | waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
 | waitJob.permissions.apiGroups[1] | string | `"kiali.io"` |  |
