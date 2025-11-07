@@ -1,6 +1,6 @@
 {{- /* Render Istio ServiceEntry for SSO */ -}}
 {{- $authStrategy := dig "auth" "strategy" "token" .Values.upstream.cr.spec -}}
-{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.sso.enabled (eq $authStrategy "openid") -}}
+{{- if and .Values.istio.enabled .Values.istio.sidecar.enabled (eq .Values.istio.sidecar.outboundTrafficPolicyMode "REGISTRY_ONLY") .Values.sso.enabled (eq $authStrategy "openid") -}}
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:

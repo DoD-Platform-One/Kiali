@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/helm-unittest/helm-unittest/main/schema/helm-testsuite.json
+suite: test istio resources
+templates:
+  - templates/bigbang/istio.yaml
+capabilities:
+  apiVersions:
+    - networking.istio.io/v1
+    - security.istio.io/v1
+tests:
+  - it: should create Sidecar resource when istio sidecar is enabled with REGISTRY_ONLY
+    set:
+      istio.enabled: true
+      istio.sidecar.enabled: true
+      istio.sidecar.outboundTrafficPolicyMode: REGISTRY_ONLY
+    documentSelector:
+      path: kind
+      value: Sidecar
+    asserts:
+      - isKind:
+          of: Sidecar
+      - equal:
+          path: metadata.name
+          value: RELEASE-NAME-sidecar
+      - equal:
+          path: spec.outboundTrafficPolicy.mode
+          value: REGISTRY_ONLY
+
+  - it: should create PeerAuthentication resource when istio is enabled
+    set:
+      istio.enabled: true
+      istio.mtls.mode: STRICT
+    documentSelector:
+      path: kind
+      value: PeerAuthentication
+    asserts:
+      - isKind:
+          of: PeerAuthentication
+      - equal:
+          path: metadata.name
+          value: default-peer-auth
+      - equal:
+          path: spec.mtls.mode
+          value: STRICT

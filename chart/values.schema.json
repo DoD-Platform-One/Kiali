@@ -70,71 +70,229 @@
     },
     "istio": {
       "type": "object",
+      "description": "Istio service mesh configuration",
       "properties": {
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Enable Istio integration",
+          "default": false
         },
-        "hardened": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean"
-            },
-            "customAuthorizationPolicies": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            },
-            "outboundTrafficPolicyMode": {
-              "type": "string",
-              "enum": [
-                "REGISTRY_ONLY",
-                "ALLOW_ANY"
-              ]
-            },
-            "customServiceEntries": {
-              "type": "array",
-              "items": {
-                "type": "object"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "kiali": {
-          "type": "object",
-          "properties": {
-            "gateways": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "hosts": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "additionalProperties": false
+        "injection": {
+          "type": "string",
+          "description": "Istio sidecar injection mode (enabled, disabled, or empty for no label)",
+          "enum": ["enabled", "disabled", ""]
         },
         "mtls": {
           "type": "object",
+          "description": "Mutual TLS configuration",
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "STRICT",
-                "PERMISSIVE"
-              ]
+              "description": "mTLS mode (STRICT, PERMISSIVE, or DISABLE)",
+              "enum": ["STRICT", "PERMISSIVE", "DISABLE"],
+              "default": "STRICT"
+            }
+          },
+          "additionalProperties": false
+        },
+        "sidecar": {
+          "type": "object",
+          "description": "Istio Sidecar resource configuration for outbound traffic control",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable Istio Sidecar resource (restricts outbound traffic)",
+              "default": false
+            },
+            "outboundTrafficPolicyMode": {
+              "type": "string",
+              "description": "Outbound traffic policy mode (REGISTRY_ONLY or ALLOW_ANY)",
+              "enum": ["REGISTRY_ONLY", "ALLOW_ANY"],
+              "default": "REGISTRY_ONLY"
+            }
+          },
+          "additionalProperties": false
+        },
+        "serviceEntries": {
+          "type": "object",
+          "description": "Istio ServiceEntry resources configuration",
+          "properties": {
+            "custom": {
+              "type": "array",
+              "description": "List of custom Istio ServiceEntry resources",
+              "items": {
+                "type": "object",
+                "required": ["name", "spec"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the ServiceEntry"
+                  },
+                  "labels": {
+                    "type": "object",
+                    "description": "Additional labels for the ServiceEntry",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "annotations": {
+                    "type": "object",
+                    "description": "Annotations for the ServiceEntry",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "spec": {
+                    "type": "object",
+                    "description": "Istio ServiceEntry spec"
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "authorizationPolicies": {
+          "type": "object",
+          "description": "Istio AuthorizationPolicies configuration for service mesh security",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Enable generation of Istio AuthorizationPolicies",
+              "default": false
+            },
+            "generateFromNetpol": {
+              "type": "boolean",
+              "description": "Generate Istio AuthorizationPolicies from NetworkPolicy configurations with SPIFFE-based identity verification when service account identities are specified",
+              "default": false
+            },
+            "custom": {
+              "type": "array",
+              "description": "List of custom Istio AuthorizationPolicy resources",
+              "items": {
+                "type": "object",
+                "required": ["name", "spec"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the AuthorizationPolicy"
+                  },
+                  "labels": {
+                    "type": "object",
+                    "description": "Additional labels for the AuthorizationPolicy",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "annotations": {
+                    "type": "object",
+                    "description": "Annotations for the AuthorizationPolicy",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "spec": {
+                    "type": "object",
+                    "description": "Istio AuthorizationPolicy spec"
+                  }
+                }
+              }
+            },
+            "defaults": {
+              "type": "object",
+              "description": "Default authorization policies",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Enable all default authorization policies",
+                  "default": true
+                },
+                "denyAll": {
+                  "type": "object",
+                  "description": "Deny all ingress by default (allow-nothing policy)",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                },
+                "allowInNamespace": {
+                  "type": "object",
+                  "description": "Allow ingress from same namespace",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "additionalPolicies": {
+              "type": "object",
+              "description": "Additional custom Istio AuthorizationPolicies (map structure to avoid override issues)",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Enable this authorization policy",
+                    "default": true
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the authorization policy (optional, defaults to map key)"
+                  },
+                  "namespace": {
+                    "type": "string",
+                    "description": "Namespace for the authorization policy (optional)"
+                  },
+                  "labels": {
+                    "type": "object",
+                    "description": "Additional labels for the authorization policy",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "annotations": {
+                    "type": "object",
+                    "description": "Annotations for the authorization policy",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "spec": {
+                    "type": "object",
+                    "description": "Istio AuthorizationPolicy spec",
+                    "properties": {
+                      "selector": {
+                        "type": "object",
+                        "description": "Pod selector for the authorization policy"
+                      },
+                      "action": {
+                        "type": "string",
+                        "description": "Action to take when rules match",
+                        "enum": ["ALLOW", "DENY", "AUDIT", "CUSTOM"]
+                      },
+                      "rules": {
+                        "type": "array",
+                        "description": "List of authorization rules",
+                        "items": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": ["spec"]
+              }
             }
           },
           "additionalProperties": false
         }
-      },
-      "additionalProperties": false
+      }
     },
     "networkPolicies": {
       "type": "object",
@@ -563,11 +721,6 @@
           "type": "object",
           "description": "Ingress network policy configuration",
           "properties": {
-            "generateAuthorizationPolicies": {
-              "type": "boolean",
-              "description": "Generate Istio AuthorizationPolicies for SPIFFE-based identity verification when service account identities are specified",
-              "default": false
-            },
             "defaults": {
               "type": "object",
               "description": "Default ingress policies",

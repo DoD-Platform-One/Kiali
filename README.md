@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.17.0-bb.1](https://img.shields.io/badge/Version-2.17.0--bb.1-informational?style=flat-square) ![AppVersion: 2.17.0](https://img.shields.io/badge/AppVersion-2.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.17.0-bb.2](https://img.shields.io/badge/Version-2.17.0--bb.2-informational?style=flat-square) ![AppVersion: 2.17.0](https://img.shields.io/badge/AppVersion-2.17.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -52,10 +52,11 @@ helm install kiali chart/
 | routes.inbound.kiali.service | string | `"kiali.kiali.svc.cluster.local"` |  |
 | routes.inbound.kiali.port | int | `20001` |  |
 | istio.enabled | bool | `false` |  |
-| istio.hardened.enabled | bool | `false` |  |
-| istio.hardened.customAuthorizationPolicies | list | `[]` |  |
-| istio.hardened.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
-| istio.hardened.customServiceEntries | list | `[]` |  |
+| istio.sidecar.enabled | bool | `false` |  |
+| istio.sidecar.outboundTrafficPolicyMode | string | `"REGISTRY_ONLY"` |  |
+| istio.serviceEntries.custom | list | `[]` |  |
+| istio.authorizationPolicies.enabled | bool | `false` |  |
+| istio.authorizationPolicies.custom | list | `[]` |  |
 | istio.mtls.mode | string | `"STRICT"` |  |
 | tracing.enabled | bool | `true` |  |
 | monitoring.enabled | bool | `true` |  |
@@ -89,6 +90,7 @@ helm install kiali chart/
 | upstream.cr.create | bool | `true` |  |
 | upstream.cr.spec.server.port | int | `20001` |  |
 | upstream.cr.spec.auth.strategy | string | `"anonymous"` |  |
+| upstream.cr.spec.deployment.network_policy.enabled | bool | `false` |  |
 | upstream.cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
 | upstream.cr.spec.deployment.image_version | string | `"v2.17.0"` |  |
 | upstream.cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |

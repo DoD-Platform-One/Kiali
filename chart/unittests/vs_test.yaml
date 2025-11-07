@@ -10,6 +10,7 @@ tests:
     set:
       istio.enabled: true
       domain: example.com
+      networkPolicies.enabled: true
     documentSelector:
       path: kind
       value: VirtualService
@@ -23,6 +24,10 @@ tests:
           path: spec.hosts
           content: kiali.example.com
   - it: should create network policies to allow ingress from istio gateway
+    set:
+      istio.enabled: true
+      domain: example.com
+      networkPolicies.enabled: true
     documentSelector:
       path: metadata.name
       value: allow-ingress-to-kiali-20001-from-ns-istio-gateway-pod-public-ingressgateway
