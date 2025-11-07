@@ -7,3 +7,4 @@ Find hostname from uri
 {{- $host := regexSplit ":" (first $hostWithPort) -1 -}}
 {{- printf "%s" (first $host) -}}
 {{- end -}}
+

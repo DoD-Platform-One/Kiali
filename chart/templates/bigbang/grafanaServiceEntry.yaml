@@ -1,5 +1,5 @@
 {{- /* Render Istio ServiceEntry for Grafana (external) */ -}}
-{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.upstream.cr.spec.external_services.grafana.enabled -}}
+{{- if and .Values.istio.enabled .Values.istio.sidecar.enabled (eq .Values.istio.sidecar.outboundTrafficPolicyMode "REGISTRY_ONLY") .Values.upstream.cr.spec.external_services.grafana.enabled -}}
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:

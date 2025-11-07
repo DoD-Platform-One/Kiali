@@ -17,8 +17,6 @@ grafana:
       enabled: false
 neuvector:
   enabled: false
-loki:
-  enabled: false
 tempo:
   enabled: false
   values:
