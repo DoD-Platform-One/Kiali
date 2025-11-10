@@ -7,7 +7,6 @@
     "dependencyDashboardTitle": "Renovate: Upgrade Kiali Package Dependencies",
     "draftPR": true,
     "enabledManagers": [
-        "helm-values",
         "custom.regex",
         "helmv3"
     ],
@@ -19,18 +18,11 @@
         "renovate"
     ],
     "packageRules": [
-        {
-            "matchDatasources": [
-                "docker"
-            ],
-            "groupName": "Ironbank"
-        },
-        {
-            "matchPackageNames": [
-                "registry1.dso.mil/ironbank/big-bang/base"
-            ],
-            "allowedVersions": "!/8.4/"
-        }
+      {
+        "matchDatasources": ["docker", "helm"],
+        "matchManagers": ["custom.regex", "helmv3"],
+        "groupName": "Kiali"
+      }
     ],
     "customManagers": [
         {
@@ -52,9 +44,9 @@
                 "- Kiali:\\s*(?<currentValue>.+)",
                 "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
             ],
-            "extractVersionTemplate": "^v(?<version>.*)$",
-            "depNameTemplate": "registry1.dso.mil/ironbank/opensource/kiali/kiali-operator",
-            "datasourceTemplate": "docker"
+            "depNameTemplate": "kiali-operator",
+            "datasourceTemplate": "helm",
+            "registryUrlTemplate": "https://kiali.org/helm-charts/"
         },
         {
             "customType": "regex",
@@ -70,5 +62,17 @@
     "separateMajorMinor": false,
     "postUpdateOptions": [
         "helmUpdateSubChartArchives"
+    ],
+  "postUpgradeTasks": {
+    "commands": [
+      "./bump-chart-yaml",
+      "./bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}(\\\\n|\\n){{/each}}'",
+      "./regenerate-helm-docs"
+    ],
+    "fileFilters": [
+      "chart/Chart.yaml",
+      "README.md",
+      "CHANGELOG.md"
     ]
+  }
 }
