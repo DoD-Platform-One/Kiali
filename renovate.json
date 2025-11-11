@@ -65,9 +65,9 @@
     ],
   "postUpgradeTasks": {
     "commands": [
-      "./bump-chart-yaml",
-      "./bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}(\\\\n|\\n){{/each}}'",
-      "./regenerate-helm-docs"
+      "bump-chart-yaml",
+      "bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}(\\\\n|\\n){{/each}}'",
+      "regenerate-helm-docs"
     ],
     "fileFilters": [
       "chart/Chart.yaml",
