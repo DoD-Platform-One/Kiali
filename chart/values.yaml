@@ -74,7 +74,7 @@ upstream:
 
   image:
     repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-    tag: v2.17.0
+    tag: v2.18.0
     pullPolicy: IfNotPresent
     pullSecrets:
       - private-registry
@@ -115,7 +115,7 @@ upstream:
         network_policy:
           enabled: false
         image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-        image_version: v2.17.0
+        image_version: v2.18.0
         image_pull_secrets:
           - private-registry
         resources:
@@ -141,14 +141,14 @@ upstream:
           url: http://monitoring-monitoring-kube-prometheus.monitoring.svc.cluster.local:9090
         grafana:
           internal_url: "http://monitoring-grafana.monitoring.svc.cluster.local:80"
-          url: "https://grafana.bigbang.dev"
+          external_url: "https://grafana.bigbang.dev"
           auth:
             username: "admin"
             password: "prom-operator"
             type: basic
         tracing:
           enabled: true
-          url: "https://tracing.bigbang.dev"
+          external_url: "https://tracing.bigbang.dev"
           internal_url: "http://jaeger-query.jaeger.svc.cluster.local:16686"
           use_grpc: false
           whitelist_istio_system: ["istio"]
