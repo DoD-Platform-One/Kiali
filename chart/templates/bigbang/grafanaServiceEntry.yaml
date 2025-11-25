@@ -3,13 +3,13 @@
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
-  name: {{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.url | replace "." "-" }}-service-entry
+  name: {{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.external_url | replace "." "-" }}-service-entry
   namespace: {{ $.Release.Namespace }}
 spec:
   exportTo:
     - "."
   hosts:
-    - {{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.url }}
+    - {{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.external_url }}
   location: MESH_EXTERNAL
   ports:
     - number: 443
