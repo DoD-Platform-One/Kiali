@@ -2,6 +2,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [2.19.0-bb.0] (2025-12-03)
+### Changed
+- kiali-operator 2.18.0 -> 2.19.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali v2.18.0 -> v2.19.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali-operator v2.18.0 -> v2.19.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.33.6 -> v1.34.2
+
 ## [2.18.0-bb.1] (2025-11-25)
 ### Updated
 - Updated service entry templates to use updated external_url values

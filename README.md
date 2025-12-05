@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.18.0-bb.1](https://img.shields.io/badge/Version-2.18.0--bb.1-informational?style=flat-square) ![AppVersion: 2.18.0](https://img.shields.io/badge/AppVersion-2.18.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.19.0-bb.0](https://img.shields.io/badge/Version-2.19.0--bb.0-informational?style=flat-square) ![AppVersion: 2.19.0](https://img.shields.io/badge/AppVersion-2.19.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
 Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
@@ -75,7 +75,7 @@ helm install kiali chart/
 | waitJob.permissions.resources[1] | string | `"kialis"` |  |
 | upstream.nameOverride | string | `"kiali-operator"` |  |
 | upstream.image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| upstream.image.tag | string | `"v2.18.0"` |  |
+| upstream.image.tag | string | `"v2.19.0"` |  |
 | upstream.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
 | upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -92,7 +92,7 @@ helm install kiali chart/
 | upstream.cr.spec.auth.strategy | string | `"anonymous"` |  |
 | upstream.cr.spec.deployment.network_policy.enabled | bool | `false` |  |
 | upstream.cr.spec.deployment.image_name | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali"` |  |
-| upstream.cr.spec.deployment.image_version | string | `"v2.18.0"` |  |
+| upstream.cr.spec.deployment.image_version | string | `"v2.19.0"` |  |
 | upstream.cr.spec.deployment.image_pull_secrets[0] | string | `"private-registry"` |  |
 | upstream.cr.spec.deployment.resources.requests.cpu | string | `"100m"` |  |
 | upstream.cr.spec.deployment.resources.requests.memory | string | `"128Mi"` |  |
