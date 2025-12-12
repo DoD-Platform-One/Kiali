@@ -1,21 +1,36 @@
 # Changelog
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+
+## [2.19.0-bb.1] (2025-12-10)
+
+### Updated
+
+- bb-common 0.10.0 -> 0.11.1
+- gluon 0.9.6 -> 0.9.7
+
 ## [2.19.0-bb.0] (2025-12-03)
+
 ### Changed
+
 - kiali-operator 2.18.0 -> 2.19.0
 - registry1.dso.mil/ironbank/opensource/kiali/kiali v2.18.0 -> v2.19.0
 - registry1.dso.mil/ironbank/opensource/kiali/kiali-operator v2.18.0 -> v2.19.0
 - registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.33.6 -> v1.34.2
 
 ## [2.18.0-bb.1] (2025-11-25)
+
 ### Updated
+
 - Updated service entry templates to use updated external_url values
 - Fixed logic error in tracing service entry
 
 ## [2.18.0-bb.0] (2025-11-14)
+
 ### Changed
+
 - Updated deprecated default values
 - gluon 0.9.3 -> 0.9.6
 - kiali-operator 2.17.0 -> 2.18.0
@@ -145,7 +160,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Updated
 
 - Updated Gluon to v0.5.19
-
 
 ## [2.9.0-bb.1] - 2025-05-07
 
