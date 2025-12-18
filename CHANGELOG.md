@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.19.0-bb.2] (2025-12-15)
+
+### Updated
+
+- bb-common 0.10.0 -> 0.11.2
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.34.2 -> v1.34.3
+
 ## [2.19.0-bb.1] (2025-12-10)
 
 ### Updated
