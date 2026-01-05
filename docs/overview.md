@@ -10,11 +10,11 @@ Kiali is an application that allows for monitoring and management related to the
 
 ## How it works
 
-Kiali connects with Prometheus, Grafana, Jaeger, and Istio to collect and aggregate data. Please reference the [architecture document](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/understanding-bigbang/package-architecture/kiali.md) for more information.
+Kiali connects with Prometheus, Grafana, Tempo, and Istio to collect and aggregate data. Please reference the [architecture document](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/understanding-bigbang/package-architecture/kiali.md) for more information.
 
 ## Prerequisites
 
-Because Kiali is used to aggregate data about the Istio service mesh, it will always be dependent on Istio.  In the Big Bang implementation, Kiali is also coupled with and dependent on Prometheus, Grafana, and Jaeger.
+Because Kiali is used to aggregate data about the Istio service mesh, it will always be dependent on Istio.  In the Big Bang implementation, Kiali is also coupled with and dependent on Prometheus, Grafana, and Tempo.
 
 ## Authentication
   
