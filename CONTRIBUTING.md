@@ -15,10 +15,14 @@ Development requires the Kubernetes CLI tool as well as a local Kubernetes clust
 To contribute a change:
 
 1. Create a branch on the cloned repository
-2. Make the changes in code.
-3. Write tests using [cypress](https://www.cypress.io) and [Conftest](https://conftest.dev)
-4. Make commits using the [Conventional Commits](https://www.conventionalcommits.org/) format. This helps with automation for changelog. Update `CHANGELOG.md` in the same commit using the [Keep a Changelog](https://keepachangelog.com). Depending on tooling maturity, this step may be automated.
-5. Open a merge request using one of the provided templates. If this merge request is solving a preexisting issue, add the issue reference into the description of the MR.
-6. During this time, ensure that all new commits are rebased into your branch so that it remains up to date with the `main` branch.
-7. Wait for a maintainer of the repository (see CODEOWNERS) to approve.
-8. If you have permissions to merge, you are responsible for merging. Otherwise, a CODEOWNER will merge the commit.
+1. Make the changes in code.
+1. Write tests using [cypress](https://www.cypress.io) and [Conftest](https://conftest.dev)
+1. Make commits using the [Conventional Commits](https://www.conventionalcommits.org/) format. This helps with automation for changelog. Update `CHANGELOG.md` in the same commit using the [Keep a Changelog](https://keepachangelog.com). Depending on tooling maturity, this step may be automated.
+1. Open a merge request using one of the provided templates. If this merge request is solving a preexisting issue, add the issue reference into the description of the MR.
+1. Add a reference to the issue in the merge request description
+1. Resolve any failures from the pipeline
+1. Resolve any merge conflicts
+1. Label the Merge Request with `status::review`
+1. During this time, ensure that all new commits are rebased into your branch so that it remains up to date with the `main` branch.
+1. Wait for a maintainer of the repository (see CODEOWNERS) to approve.
+1. If you have permissions to merge, you are responsible for merging. Otherwise, a CODEOWNER will merge the commit.
