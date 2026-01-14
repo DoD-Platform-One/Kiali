@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.20.0-bb.0] (2025-12-23)
+### Changed
+- bb-common 0.11.2 -> 0.12.0
+- kiali-operator 2.19.0 -> 2.20.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali-operator v2.19.0 -> v2.20.0
+
 ## [2.19.0-bb.2] (2025-12-15)
 
 ### Updated

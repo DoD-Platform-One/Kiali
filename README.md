@@ -1,9 +1,9 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # kiali
 
-![Version: 2.19.0-bb.2](https://img.shields.io/badge/Version-2.19.0--bb.2-informational?style=flat-square) ![AppVersion: 2.19.0](https://img.shields.io/badge/AppVersion-2.19.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
+![Version: 2.20.0-bb.0](https://img.shields.io/badge/Version-2.20.0--bb.0-informational?style=flat-square) ![AppVersion: 2.20.0](https://img.shields.io/badge/AppVersion-2.20.0-informational?style=flat-square) ![Maintenance Track: bb_integrated](https://img.shields.io/badge/Maintenance_Track-bb_integrated-green?style=flat-square)
 
-Kiali is an open source project for service mesh observability, refer to <https://www.kiali.io> for details.
+Kiali is an open source project for service mesh observability, refer to https://www.kiali.io for details.
 
 ## Upstream References
 
@@ -29,7 +29,7 @@ Kiali is an open source project for service mesh observability, refer to <https:
 
 Install Helm
 
-<https://helm.sh/docs/intro/install/>
+https://helm.sh/docs/intro/install/
 
 ## Deployment
 
@@ -75,7 +75,7 @@ helm install kiali chart/
 | waitJob.permissions.resources[1] | string | `"kialis"` |  |
 | upstream.nameOverride | string | `"kiali-operator"` |  |
 | upstream.image.repo | string | `"registry1.dso.mil/ironbank/opensource/kiali/kiali-operator"` |  |
-| upstream.image.tag | string | `"v2.19.0"` |  |
+| upstream.image.tag | string | `"v2.20.0"` |  |
 | upstream.image.pullPolicy | string | `"IfNotPresent"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
 | upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -123,3 +123,4 @@ Please see the [contributing guide](./CONTRIBUTING.md) if you are interested in 
 ---
 
 _This file is programatically generated using `helm-docs` and some BigBang-specific templates. The `gluon` repository has [instructions for regenerating package READMEs](https://repo1.dso.mil/big-bang/product/packages/gluon/-/blob/master/docs/bb-package-readme.md)._
+
