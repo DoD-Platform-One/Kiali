@@ -8,4 +8,4 @@ The token method uses the Kubernetes service account token for authentication. T
 kubectl -n kiali create token kiali-service-account
   ```
 
-For additional details on other authentication methods see the [SSO](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/understanding-bigbang/package-architecture/kiali.md#single-sign-on-sso) and [Non-SSO](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/understanding-bigbang/package-architecture/kiali.md#non-sso-login) login sections of the architecture document in Big Bang.
+For additional details on other authentication methods see the [SSO](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/packages/core/kiali.md#single-sign-on-sso) and [Non-SSO](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/packages/core/kiali.md#non-sso-login) login sections of the architecture document in Big Bang.
