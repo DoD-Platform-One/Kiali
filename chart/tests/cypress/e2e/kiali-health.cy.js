@@ -2,11 +2,13 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
-before(() => {
-  if (Cypress.env('keycloak_test_enable')) {
-    cy.visit(Cypress.env('url'))
-    cy.performKeycloakLogin(Cypress.env('tnr_username'), Cypress.env('tnr_password'))
-  }
+before(function () {
+  cy.env(['keycloak_test_enable', 'url', 'tnr_username', 'tnr_password']).then(({ keycloak_test_enable, url, tnr_username, tnr_password }) => {
+    if (keycloak_test_enable) {
+      cy.visit(url)
+      cy.performKeycloakLogin(tnr_username, tnr_password)
+    }
+  })
 })
 
 // Clear cookies to force login again
@@ -33,7 +35,9 @@ function collapseMenu() {
 describe('Kiali', function () {
   // Basic test that validates pages are accessible, basic error check
   it('loads when visited', function () {
-    cy.visit(Cypress.env('url'))
+    cy.env(['url']).then(({ url }) => {
+      cy.visit(url)
+    })
   })
 
   it('has a title containing "Kiali"', function () {
@@ -59,32 +63,40 @@ describe('Kiali', function () {
 
   it('should verify Kiali sidecar metrics are up', { retries: 3 }, function () {
     // assuming cypress env url is kiali.dev.bigbang.mil, use the base domain to compute prometheus url
-    const prometheusBaseUrl = Cypress.env('url').replace('kiali', 'prometheus')
-    const podMonitorName = Cypress.env("pod_monitor_name") || "monitoring-monitoring-kube-istio-envoy"
+    cy.env(['url', 'pod_monitor_name']).then(({ url, pod_monitor_name }) => {
+      const prometheusBaseUrl = url.replace('kiali', 'prometheus')
+      const podMonitorName = pod_monitor_name || "monitoring-monitoring-kube-istio-envoy"
 
-    // Load the Prometheus targets page with a specific scrape pool and filter (Kiali)
-    cy.visit(`${prometheusBaseUrl}/targets?pool=podMonitor%2Fmonitoring%2F${podMonitorName}%2F0&search=kiali`)
+      // Load the Prometheus targets page with a specific scrape pool and filter (Kiali)
+      cy.visit(`${prometheusBaseUrl}/targets?pool=podMonitor%2Fmonitoring%2F${podMonitorName}%2F0&search=kiali`)
 
-    // Verify the scrape pool is displayed
-    cy.contains(`podMonitor/monitoring/${podMonitorName}/0`).should('exist')
+      // Verify the scrape pool is displayed
+      cy.contains(`podMonitor/monitoring/${podMonitorName}/0`).should('exist')
 
-    // Get all table rows with target data and verify each shows "up" status (should be at least two)
-    cy.get('table tbody tr').should('have.length.gte', 2).each(($row) => {
-      // Each row should contain "up" status indicator
-      cy.wrap($row).should('contain.text', 'up')
+      // Get all table rows with target data and verify each shows "up" status (should be at least two)
+      cy.get('table tbody tr').should('have.length.gte', 2).each(($row) => {
+        // Each row should contain "up" status indicator
+        cy.wrap($row).should('contain.text', 'up')
+      })
     })
   })
 
   // Skip remaining tests if check_data is not set
   // These tests should only run in BB CI since nothing is istio injected in Package CI
-  if (!Cypress.env("check_data")) {
-    return
-  }
+  context('if check_data is set', function () {
 
-  context('check_data is set', function () {
+    beforeEach(function () {
+      cy.env(['check_data']).then(({ check_data }) => {
+        if (!check_data) {
+          this.skip()
+        }
+      })
+    })
 
     it('pops out the side menu', function () {
-      cy.visit(Cypress.env('url'))
+      cy.env(['url']).then(({ url }) => {
+        cy.visit(url)
+      })
       expandMenu();
     })
 

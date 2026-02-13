@@ -60,6 +60,7 @@ bbtests:
 
 waitJob:
   enabled: true
+  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.4
   permissions:
     apiGroups:
       - apps
