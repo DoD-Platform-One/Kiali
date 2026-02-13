@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.21.0-bb.1] (2026-02-13)
+### Changed
+- gluon 0.9.7 -> 0.9.8
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.34.3 -> v1.34.4
+- Updated Cypress tests for compatibility with 15.10.0
+
 ## [2.21.0-bb.0] (2026-01-29)
 ### Changed
 - bb-common 0.12.0 -> 0.14.0
