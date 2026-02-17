@@ -75,7 +75,7 @@ upstream:
 
   image:
     repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-    tag: v2.21.0
+    tag: v2.22.0
     pullPolicy: IfNotPresent
     pullSecrets:
       - private-registry
@@ -116,7 +116,7 @@ upstream:
         network_policy:
           enabled: false
         image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-        image_version: v2.21.0
+        image_version: v2.22.0
         image_pull_secrets:
           - private-registry
         resources:

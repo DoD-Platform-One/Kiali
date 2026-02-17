@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.22.0-bb.0] (2026-02-17)
+### Changed
+- kiali-operator 2.21.0 -> 2.22.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali v2.21.0 -> v2.22.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali-operator v2.21.0 -> v2.22.0
+
 ## [2.21.0-bb.1] (2026-02-13)
 ### Changed
 - gluon 0.9.7 -> 0.9.8
