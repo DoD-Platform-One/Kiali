@@ -1,78 +1,89 @@
 {
-    "baseBranches": [
-        "main"
-    ],
-    "configWarningReuseIssue": false,
-    "dependencyDashboard": true,
-    "dependencyDashboardTitle": "Renovate: Upgrade Kiali Package Dependencies",
-    "draftPR": true,
-    "enabledManagers": [
-        "custom.regex",
-        "helmv3"
-    ],
-    "ignorePaths": [
-        "chart/charts/**"
-    ],
-    "labels": [
-        "kiali",
-        "renovate"
-    ],
-    "packageRules": [
-      {
-        "matchDatasources": ["docker", "helm"],
-        "matchManagers": ["custom.regex", "helmv3"],
-        "groupName": "Kiali"
+  "baseBranches": [
+    "main"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate: Update Kiali Package Dependencies",
+  "draftPR": true,
+  "labels": [
+    "kiali",
+    "renovate",
+    "kind::maintenance"
+  ],
+  "enabledManagers": [
+    "custom.regex",
+    "helmv3"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
+      "groupName": "Kiali",
+      "postUpgradeTasks": {
+        "commands": [
+          "match-chart-yaml-appversion",
+          "bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}\\n{{/each}}'",
+          "regenerate-helm-docs"
+        ],
+        "fileFilters": [
+          "chart/Chart.yaml",
+          "README.md",
+          "CHANGELOG.md"
+        ],
+        "executionMode": "branch"
       }
-    ],
-    "customManagers": [
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
-                "/^chart/values\\.yaml$/"
-            ],
-            "matchStrings": [
-                "(repo|image_name|repository)\\S*:\\s*(?<depName>\\S+).*\n\\s+(tag|image_version):\\s*(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        },
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
-                "/^chart/Chart\\.yaml$/"
-            ],
-            "matchStrings": [
-                "- Kiali:\\s*(?<currentValue>.+)",
-                "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
-            ],
-            "depNameTemplate": "kiali-operator",
-            "datasourceTemplate": "helm",
-            "registryUrlTemplate": "https://kiali.org/helm-charts/"
-        },
-        {
-            "customType": "regex",
-            "managerFilePatterns": [
-                "/^chart/Chart\\.yaml$/"
-            ],
-            "matchStrings": [
-                "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
-            ],
-            "datasourceTemplate": "docker"
-        }
-    ],
-    "separateMajorMinor": false,
-    "postUpdateOptions": [
-        "helmUpdateSubChartArchives"
-    ],
-  "postUpgradeTasks": {
-    "commands": [
-      "bump-chart-yaml",
-      "bump-changelog '{{#each upgrades}}- {{depName}} {{currentVersion}} -> {{newVersion}}\\n{{/each}}'",
-      "regenerate-helm-docs"
-    ],
-    "fileFilters": [
-      "chart/Chart.yaml",
-      "README.md",
-      "CHANGELOG.md"
-    ]
-  }
+    }
+  ],
+  "separateMajorMinor": false,
+  "postUpdateOptions": [
+    "helmUpdateSubChartArchives"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "- Kiali:\\s*(?<currentValue>.+)",
+        "appVersion:[^\\S\\r\\n]+(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "kiali-operator",
+      "datasourceTemplate": "helm",
+      "registryUrlTemplate": "https://kiali.org/helm-charts/"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^chart/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "image:[^\\S\\r\\n]+(?<depName>.+):(?<currentValue>.+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
+      ],
+      "matchStrings": [
+        "(repo|image_name|repository)\\S*:\\s*(?<depName>\\S+).*\n\\s+(tag|image_version):\\s*(?<currentValue>.+)"
+      ],
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^chart/values\\.yaml$/"
+      ],
+      "matchStrings": [
+        "image:[^\\S\\r\\n]+registry1\\.dso\\.mil/ironbank/opensource/kubernetes/kubectl:(?<currentValue>.+)"
+      ],
+      "depNameTemplate": "registry1.dso.mil/ironbank/opensource/kubernetes/kubectl",
+      "datasourceTemplate": "docker"
+    }
+  ]
 }
