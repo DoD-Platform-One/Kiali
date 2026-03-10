@@ -3,7 +3,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
-  name: {{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.external_url | replace "." "-" }}-service-entry
+  name: grafana-{{ include "kiali.hostnameFromUri" .Values.upstream.cr.spec.external_services.grafana.external_url | replace "." "-" }}-service-entry
   namespace: {{ $.Release.Namespace }}
 spec:
   exportTo:

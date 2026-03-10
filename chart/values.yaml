@@ -1,4 +1,4 @@
-domain: bigbang.dev
+domain: dev.bigbang.mil
 
 sso:
   enabled: false
@@ -60,7 +60,7 @@ bbtests:
 
 waitJob:
   enabled: true
-  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.4
+  image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.5
   permissions:
     apiGroups:
       - apps
@@ -75,7 +75,7 @@ upstream:
 
   image:
     repo: registry1.dso.mil/ironbank/opensource/kiali/kiali-operator
-    tag: v2.22.0
+    tag: v2.23.0
     pullPolicy: IfNotPresent
     pullSecrets:
       - private-registry
@@ -116,7 +116,7 @@ upstream:
         network_policy:
           enabled: false
         image_name: registry1.dso.mil/ironbank/opensource/kiali/kiali
-        image_version: v2.22.0
+        image_version: v2.23.0
         image_pull_secrets:
           - private-registry
         resources:
@@ -142,14 +142,17 @@ upstream:
           url: http://monitoring-monitoring-kube-prometheus.monitoring.svc.cluster.local:9090
         grafana:
           internal_url: "http://monitoring-grafana.monitoring.svc.cluster.local:80"
-          external_url: "https://grafana.bigbang.dev"
+          external_url: "https://grafana.dev.bigbang.mil"
           auth:
             username: "admin"
             password: "prom-operator"
             type: basic
         tracing:
           enabled: true
-          external_url: "https://tracing.bigbang.dev"
-          internal_url: "http://jaeger-query.jaeger.svc.cluster.local:16686"
+          external_url: "https://grafana.dev.bigbang.mil"
+          internal_url: "http://tempo-tempo.tempo.svc.cluster.local:3200"
           use_grpc: false
           whitelist_istio_system: ["istio"]
+          provider: tempo
+          tempo_config:
+            datasource_uid: tempo

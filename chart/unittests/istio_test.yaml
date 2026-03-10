@@ -20,7 +20,7 @@ tests:
           of: Sidecar
       - equal:
           path: metadata.name
-          value: RELEASE-NAME-sidecar
+          value: sidecar
       - equal:
           path: spec.outboundTrafficPolicy.mode
           value: REGISTRY_ONLY

@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [2.23.0-bb.0] (2026-03-10)
+### Changed
+- bb-common 0.14.0 -> 0.14.1
+- kiali-operator 2.22.0 -> 2.23.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali v2.22.0 -> v2.23.0
+- registry1.dso.mil/ironbank/opensource/kiali/kiali-operator v2.22.0 -> v2.23.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.34.4 -> v1.34.5
+- Fixed Kiali distributed tracing external URL to point to Grafana and resolved service entry name conflict when tracing and Grafana share the same hostname.
+
 ## [2.22.0-bb.0] (2026-02-17)
 ### Changed
 - kiali-operator 2.21.0 -> 2.22.0
